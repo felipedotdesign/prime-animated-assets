@@ -1,0 +1,241 @@
+.environments-grid,
+.environments-grid * {
+  box-sizing: border-box;
+}
+
+.environments-grid {
+  position: relative;
+  width: var(--figma-frame-width, 356px);
+  height: var(--figma-frame-height, 330px);
+  margin: 0;
+  overflow: hidden;
+  background: #000;
+  color: #fff;
+  font-family: ui-monospace, "SFMono-Regular", "SF Mono", Menlo, Consolas,
+    "Liberation Mono", monospace;
+  font-weight: 500;
+}
+
+.environments-grid__stage {
+  position: absolute;
+  top: 45px;
+  left: 28px;
+  width: 300px;
+  height: 240px;
+}
+
+.environments-grid__lines,
+.environments-grid__content {
+  position: absolute;
+  inset: 0;
+}
+
+.environments-grid__lines {
+  z-index: 0;
+}
+
+.environments-grid__line {
+  position: absolute;
+  display: block;
+  pointer-events: none;
+  transform-origin: center;
+}
+
+.environments-grid__line--top-boundary,
+.environments-grid__line--bottom-boundary,
+.environments-grid__line--horizontal {
+  left: 0;
+  width: 300px;
+  border-top: 0.5px solid #2c2d2e;
+  animation: environments-grid-line-horizontal
+    var(--environments-grid-duration, 720ms)
+    cubic-bezier(0.33, 1, 0.68, 1)
+    var(--environments-grid-delay, 120ms) both;
+  will-change: transform;
+}
+
+.environments-grid__line--top-boundary {
+  top: 0;
+}
+
+.environments-grid__line--horizontal {
+  top: 119.75px;
+}
+
+.environments-grid__line--bottom-boundary {
+  top: 239.5px;
+}
+
+.environments-grid__line--left-boundary,
+.environments-grid__line--right-boundary,
+.environments-grid__line--top-vertical,
+.environments-grid__line--bottom-vertical {
+  border-left: 0.5px solid #2c2d2e;
+  animation: environments-grid-line-vertical
+    var(--environments-grid-duration, 720ms)
+    cubic-bezier(0.33, 1, 0.68, 1)
+    var(--environments-grid-delay, 120ms) both;
+  will-change: transform;
+}
+
+.environments-grid__line--left-boundary {
+  top: 0;
+  left: 0;
+  height: 240px;
+}
+
+.environments-grid__line--right-boundary {
+  top: 0;
+  left: 299.5px;
+  height: 240px;
+}
+
+.environments-grid__line--top-vertical {
+  top: 0;
+  left: 179.75px;
+  height: 120px;
+}
+
+.environments-grid__line--bottom-vertical {
+  top: 120px;
+  left: 119.75px;
+  height: 120px;
+}
+
+.environments-grid__content {
+  z-index: 1;
+}
+
+.environments-grid__row {
+  display: flex;
+  width: 100%;
+  height: 120px;
+}
+
+.environments-grid__cell {
+  display: flex;
+  height: 120px;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 9.053px;
+}
+
+.environments-grid__cell--push,
+.environments-grid__cell--develop {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.environments-grid__cell--init,
+.environments-grid__cell--eval {
+  width: 120px;
+  flex: 0 0 120px;
+}
+
+.environments-grid__label {
+  position: relative;
+  display: block;
+  width: 100%;
+  font-size: 11px;
+  line-height: 16px;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.environments-grid__label-text {
+  display: inline-block;
+  width: auto;
+  clip-path: inset(0 100% 0 0);
+  color: #fff;
+  animation: environments-stream-left-to-right
+    var(--environments-text-duration, 360ms) linear
+    var(--environments-label-delay, 760ms) both;
+  will-change: clip-path;
+}
+
+.environments-grid__command {
+  display: block;
+  width: 100%;
+  opacity: 0;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 10px;
+  text-transform: none;
+  white-space: nowrap;
+  animation: environments-subtext-in
+    var(--environments-subtext-duration, 320ms)
+    cubic-bezier(0.33, 1, 0.68, 1)
+    var(--environments-command-delay, 760ms) both;
+}
+
+.environments-grid__prompt {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.environments-grid__command-text {
+  display: inline-block;
+  clip-path: inset(0 100% 0 0);
+  animation: environments-stream-left-to-right
+    var(--environments-command-stream-duration, 360ms) linear
+    var(--environments-command-stream-delay, 1390ms) both;
+  will-change: clip-path;
+}
+
+@keyframes environments-grid-line-horizontal {
+  from {
+    transform: scaleX(0);
+  }
+
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes environments-grid-line-vertical {
+  from {
+    transform: scaleY(0);
+  }
+
+  to {
+    transform: scaleY(1);
+  }
+}
+
+@keyframes environments-subtext-in {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes environments-stream-left-to-right {
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .environments-grid__line {
+    animation: none;
+    will-change: auto;
+    transform: none;
+  }
+
+  .environments-grid__label-text {
+    clip-path: none;
+    animation: none;
+    will-change: auto;
+  }
+
+  .environments-grid__command {
+    opacity: 1;
+    animation: none;
+  }
+
+  .environments-grid__command-text {
+    clip-path: none;
+    animation: none;
+    will-change: auto;
+  }
+}

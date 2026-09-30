@@ -1,0 +1,93 @@
+.evaluation-table,
+.evaluation-table * {
+  box-sizing: border-box;
+}
+
+.evaluation-table {
+  position: relative;
+  width: var(--figma-frame-width, 356px);
+  height: var(--figma-frame-height, 330px);
+  overflow: hidden;
+  background: #000;
+  color: #fff;
+  font-family: ui-monospace, "SFMono-Regular", "SF Mono", Menlo, Consolas,
+    "Liberation Mono", monospace;
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.evaluation-table__content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: flex;
+  width: 320px;
+  flex-direction: column;
+  gap: 24px;
+  transform: translate(-50%, -50%);
+}
+
+.evaluation-table__header {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  border: 0.5px solid #323232;
+}
+
+.evaluation-table__name {
+  font-size: 11px;
+  line-height: normal;
+  white-space: nowrap;
+}
+
+.evaluation-table__icon {
+  display: block;
+  width: 28.3322px;
+  height: 9px;
+  flex: none;
+}
+
+.evaluation-table__rows {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  gap: 9px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.evaluation-table__row {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  line-height: normal;
+  white-space: nowrap;
+}
+
+.evaluation-table__answer {
+  color: #fff;
+  font: inherit;
+}
+
+.evaluation-table__syntax {
+  color: #323232;
+}
+
+.evaluation-table__score {
+  color: #fff;
+  font-variant-numeric: tabular-nums;
+  opacity: 0.24;
+}
+
+.evaluation-table--scores-active .evaluation-table__score {
+  opacity: var(--score-opacity, 1);
+}
+
+.evaluation-table__row--active .evaluation-table__syntax {
+  color: #fff;
+}

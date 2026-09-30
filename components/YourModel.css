@@ -1,0 +1,197 @@
+.your-model,
+.your-model * {
+  box-sizing: border-box;
+}
+
+.your-model {
+  position: relative;
+  width: var(--figma-frame-width, 356px);
+  height: var(--figma-frame-height, 330px);
+  margin: 0;
+  overflow: hidden;
+  background: #000;
+  color: #fff;
+  font-family: ui-monospace, "SFMono-Regular", "SF Mono", Menlo, Consolas,
+    "Liberation Mono", monospace;
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.your-model__grid,
+.your-model__flow {
+  position: absolute;
+  display: block;
+  max-width: none;
+  pointer-events: none;
+}
+
+.your-model__grid {
+  top: 84.75px;
+  left: 97.75px;
+  width: 160.5px;
+  height: 160.5px;
+  overflow: visible;
+}
+
+.your-model__grid-line {
+  stroke: #2c2d2e;
+  stroke-width: 0.5;
+  transform-box: fill-box;
+  transform-origin: center;
+  will-change: transform;
+}
+
+.your-model__grid-line--horizontal {
+  animation: your-model-grid-line-horizontal
+    var(--model-grid-duration, 720ms)
+    cubic-bezier(0.33, 1, 0.68, 1)
+    var(--model-grid-delay, 120ms) both;
+}
+
+.your-model__grid-line--vertical {
+  animation: your-model-grid-line-vertical
+    var(--model-grid-duration, 720ms)
+    cubic-bezier(0.33, 1, 0.68, 1)
+    var(--model-grid-delay, 120ms) both;
+}
+
+.your-model__label {
+  position: absolute;
+  top: 53px;
+  left: 178px;
+  line-height: 16px;
+  white-space: nowrap;
+}
+
+.your-model__flow {
+  top: 118.47px;
+  left: 44.92px;
+  width: 266.213px;
+  height: 55.0675px;
+}
+
+.your-model__center {
+  position: absolute;
+  top: 126.006px;
+  left: 178.002px;
+  width: 40px;
+  height: 40px;
+  background: #fff;
+  pointer-events: none;
+  animation: your-model-center-in var(--model-center-duration, 240ms)
+    cubic-bezier(0.22, 1, 0.36, 1)
+    var(--model-center-delay, 760ms) both;
+}
+
+.your-model__plus {
+  position: absolute;
+  top: 11px;
+  left: 11px;
+  width: 18px;
+  height: 18px;
+}
+
+.your-model__plus::before,
+.your-model__plus::after {
+  position: absolute;
+  content: "";
+  background: #000;
+}
+
+.your-model__plus::before {
+  top: 0;
+  left: 8.25px;
+  width: 1.5px;
+  height: 18px;
+}
+
+.your-model__plus::after {
+  top: 8.25px;
+  left: 0;
+  width: 18px;
+  height: 1.5px;
+}
+
+.your-model__flow--left {
+  animation: your-model-flow-left var(--model-flow-duration, 280ms) linear
+    var(--model-flow-delay, 780ms) both;
+}
+
+.your-model__flow--right {
+  animation: your-model-flow-right var(--model-flow-duration, 280ms) linear
+    var(--model-flow-delay, 780ms) both;
+}
+
+@keyframes your-model-grid-line-horizontal {
+  from {
+    transform: scaleX(0);
+  }
+
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes your-model-grid-line-vertical {
+  from {
+    transform: scaleY(0);
+  }
+
+  to {
+    transform: scaleY(1);
+  }
+}
+
+@keyframes your-model-center-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes your-model-flow-left {
+  from {
+    clip-path: inset(0 133.131px 0 133.082px);
+  }
+
+  to {
+    clip-path: inset(0 133.131px 0 0);
+  }
+}
+
+@keyframes your-model-flow-right {
+  from {
+    clip-path: inset(0 93.131px 0 173.082px);
+  }
+
+  to {
+    clip-path: inset(0 0 0 173.082px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .your-model__grid-line {
+    animation: none;
+    will-change: auto;
+    transform: none;
+  }
+
+  .your-model__center {
+    opacity: 1;
+    animation: none;
+  }
+
+  .your-model__flow--left {
+    clip-path: inset(0 133.131px 0 0);
+    animation: none;
+  }
+
+  .your-model__flow--right {
+    clip-path: inset(0 0 0 173.082px);
+    animation: none;
+  }
+}

@@ -1,0 +1,173 @@
+.continuous-improvement,
+.continuous-improvement * {
+  box-sizing: border-box;
+}
+
+.continuous-improvement {
+  position: relative;
+  width: var(--figma-frame-width, 356px);
+  height: var(--figma-frame-height, 330px);
+  margin: 0;
+  overflow: hidden;
+  background: #000;
+  color: #fff;
+  font-family: ui-monospace, "SFMono-Regular", "SF Mono", Menlo, Consolas,
+    "Liberation Mono", monospace;
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.continuous-improvement__diagram {
+  position: absolute;
+  inset: 0;
+}
+
+.continuous-improvement__orbit,
+.continuous-improvement__ring,
+.continuous-improvement__orbit-static,
+.continuous-improvement__arrow img {
+  display: block;
+  max-width: none;
+  pointer-events: none;
+}
+
+.continuous-improvement__orbit--vertical {
+  position: absolute;
+  top: 55px;
+  left: 125px;
+  width: 112px;
+  height: 220px;
+}
+
+.continuous-improvement__orbit-horizontal {
+  position: absolute;
+  top: 125px;
+  left: 71px;
+  display: flex;
+  width: 220px;
+  height: 80px;
+  align-items: center;
+  justify-content: center;
+}
+
+.continuous-improvement__orbit-static {
+  position: absolute;
+  opacity: 0;
+}
+
+.continuous-improvement__orbit--vertical
+  .continuous-improvement__orbit-static {
+  inset: 0;
+  width: 112px;
+  height: 220px;
+}
+
+.continuous-improvement__orbit-horizontal
+  .continuous-improvement__orbit-static {
+  top: -70px;
+  left: 70px;
+  width: 80px;
+  height: 220px;
+  transform: rotate(-90deg);
+}
+
+.continuous-improvement__orbit-motion {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.continuous-improvement__orbit-path {
+  fill: none;
+  stroke: #191a1a;
+  stroke-width: 0.5;
+  stroke-dasharray: 4 4;
+  animation: continuous-improvement-orbit-flow
+    var(--continuous-orbit-duration, 900ms) linear infinite;
+  will-change: stroke-dashoffset;
+}
+
+@keyframes continuous-improvement-orbit-flow {
+  to {
+    stroke-dashoffset: -8;
+  }
+}
+
+.continuous-improvement__ring {
+  position: absolute;
+  top: 54.25px;
+  left: 71.036px;
+}
+
+.continuous-improvement__arrow {
+  position: absolute;
+  display: flex;
+  width: 20.101px;
+  height: 24.739px;
+  align-items: center;
+  justify-content: center;
+}
+
+.continuous-improvement__arrow--right {
+  top: 165.92px;
+  left: 280.27px;
+}
+
+.continuous-improvement__arrow--left {
+  top: 139.33px;
+  left: 62.11px;
+}
+
+.continuous-improvement__arrow-transform {
+  position: relative;
+  display: block;
+  width: 22.545px;
+  height: 17.076px;
+  flex: none;
+}
+
+.continuous-improvement__arrow--right
+  .continuous-improvement__arrow-transform {
+  transform: rotate(-81.85deg) scaleY(-1);
+}
+
+.continuous-improvement__arrow--left
+  .continuous-improvement__arrow-transform {
+  transform: rotate(98.15deg) scaleY(-1);
+}
+
+.continuous-improvement__arrow img {
+  position: absolute;
+  top: -1.081px;
+  left: -0.751px;
+}
+
+.continuous-improvement__label {
+  position: absolute;
+  top: 149px;
+  left: 50%;
+  margin: 0;
+  line-height: 16px;
+  text-align: center;
+  white-space: nowrap;
+  transform: translateX(-50%);
+}
+
+.continuous-improvement__label span {
+  display: block;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .continuous-improvement__orbit-static {
+    opacity: 1;
+  }
+
+  .continuous-improvement__orbit-motion {
+    display: none;
+  }
+}

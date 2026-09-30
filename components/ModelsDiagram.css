@@ -1,0 +1,197 @@
+.models-diagram,
+.models-diagram * {
+  box-sizing: border-box;
+}
+
+.models-diagram {
+  position: relative;
+  width: var(--figma-frame-width, 356px);
+  height: var(--figma-frame-height, 330px);
+  margin: 0;
+  overflow: hidden;
+  background: #000;
+  color: #fff;
+  font-family: ui-monospace, "SFMono-Regular", "SF Mono", Menlo, Consolas,
+    "Liberation Mono", monospace;
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.models-diagram__branch,
+.models-diagram__origin,
+.models-diagram__terminal,
+.models-diagram__dot,
+.models-diagram__items {
+  position: absolute;
+  display: block;
+  max-width: none;
+  pointer-events: none;
+}
+
+.models-diagram__branch {
+  left: 49.38px;
+  width: auto;
+  height: auto;
+  clip-path: inset(0 100% 0 0);
+  animation: models-branch-reveal var(--models-flow-duration, 480ms) linear
+    calc(
+      var(--models-flow-delay, 120ms) + var(--models-stagger-offset, 0ms)
+    )
+    both;
+  will-change: clip-path;
+}
+
+.models-diagram__branch--outer-top {
+  top: 94.97px;
+}
+
+.models-diagram__branch--upper-inner {
+  top: 129.97px;
+}
+
+.models-diagram__branch--middle {
+  top: 164.75px;
+}
+
+.models-diagram__branch--lower-inner {
+  top: 164.75px;
+}
+
+.models-diagram__branch--outer-bottom {
+  top: 164.75px;
+  transform: scaleY(-1);
+  transform-origin: center;
+}
+
+.models-diagram__origin {
+  top: 159px;
+  left: 44px;
+  width: 12px;
+  height: 12px;
+}
+
+.models-diagram__models {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.models-diagram__model {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 6px;
+}
+
+.models-diagram__model--1 {
+  top: 92px;
+  --model-label-offset: -5px;
+  --model-items-offset: -1px;
+}
+
+.models-diagram__model--2 {
+  top: 127.22px;
+  --model-label-offset: -4.22px;
+  --model-items-offset: -0.22px;
+}
+
+.models-diagram__model--3 {
+  top: 162px;
+  --model-label-offset: -4px;
+  --model-items-offset: 0px;
+}
+
+.models-diagram__model--4 {
+  top: 196.78px;
+  --model-label-offset: -4.78px;
+  --model-items-offset: -0.78px;
+}
+
+.models-diagram__model--5 {
+  top: 231.57px;
+  --model-label-offset: -3.57px;
+  --model-items-offset: 0.43px;
+}
+
+.models-diagram__terminal {
+  top: 0;
+  left: 173.7px;
+  width: 6px;
+  height: 6px;
+  overflow: hidden;
+  border-radius: 50%;
+  background: #2c2d2e;
+}
+
+.models-diagram__dot {
+  inset: 0;
+  width: 6px;
+  height: 6px;
+  opacity: 0;
+  animation: models-terminal-activate var(--models-dot-duration, 100ms) linear
+    calc(
+      var(--models-flow-delay, 120ms) + var(--models-stagger-offset, 0ms) +
+        var(--models-flow-duration, 480ms)
+    )
+    both;
+  will-change: opacity;
+}
+
+.models-diagram__label {
+  position: absolute;
+  top: var(--model-label-offset);
+  left: 187px;
+  line-height: normal;
+  white-space: nowrap;
+}
+
+.models-diagram__items {
+  top: var(--model-items-offset);
+  width: 33px;
+  height: 6px;
+}
+
+.models-diagram__model--1 .models-diagram__items,
+.models-diagram__model--3 .models-diagram__items,
+.models-diagram__model--5 .models-diagram__items {
+  left: 280px;
+}
+
+.models-diagram__model--2 .models-diagram__items {
+  left: 265px;
+}
+
+.models-diagram__model--4 .models-diagram__items {
+  left: 273px;
+}
+
+@keyframes models-branch-reveal {
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@keyframes models-terminal-activate {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .models-diagram__branch {
+    clip-path: none;
+    animation: none;
+    will-change: auto;
+  }
+
+  .models-diagram__dot {
+    opacity: 1;
+    animation: none;
+    will-change: auto;
+  }
+}
