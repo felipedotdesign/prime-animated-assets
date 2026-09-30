@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import tableIconUrl from "../assets/table-icon.svg?url";
+import { MOTION_TIMING } from "./motionTiming";
 import "./EvaluationTable.css";
 
 const defaultRows = [
@@ -15,8 +16,8 @@ export default function EvaluationTable({
   name = "primeintellect/logic-env",
   rows = defaultRows,
   className = "",
-  countDelay = 350,
-  countDuration = 1100,
+  countDelay = MOTION_TIMING.evaluationTable.delay,
+  countDuration = MOTION_TIMING.evaluationTable.duration,
   complete = false,
 }) {
   const [scores, setScores] = useState(() => rows.map((row) => complete ? row.score : "0.00"));

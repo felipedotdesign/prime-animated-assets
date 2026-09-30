@@ -3,6 +3,7 @@ import guideWideUrl from "../assets/guide-wide.svg?url";
 import guideShortUrl from "../assets/guide-short.svg?url";
 import referenceTickUrl from "../assets/reference-tick.svg?url";
 import rewardCurveUrl from "../assets/reward-curve.svg?url";
+import { MOTION_TIMING } from "./motionTiming";
 import "./LineChart.css";
 
 /**
@@ -13,10 +14,10 @@ export default function LineChart({
   title = "Reward curve",
   description = "A rising, fluctuating line crossing a reference value.",
   className = "",
-  animationDuration = 1450,
-  animationDelay = 150,
-  valueCountDelay = 150,
-  valueCountDuration = 1450,
+  animationDuration = MOTION_TIMING.rewardCurve.duration,
+  animationDelay = MOTION_TIMING.rewardCurve.delay,
+  valueCountDelay = MOTION_TIMING.rewardCurve.delay,
+  valueCountDuration = MOTION_TIMING.rewardCurve.duration,
   complete = false,
 }) {
   const titleId = useId();

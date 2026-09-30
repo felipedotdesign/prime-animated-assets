@@ -1,4 +1,5 @@
 import flowUrl from "../assets/model-flow.svg?url";
+import { MOTION_TIMING } from "./motionTiming";
 import "./YourModel.css";
 
 const GRID_COLUMNS = [0.25, 40.9668, 79.9633, 120.107, 160.25];
@@ -39,30 +40,22 @@ function ModelGrid() {
 export default function YourModel({
   label = "Your model",
   className = "",
-  gridDuration = 720,
-  gridDelay = 120,
-  centerDuration = 240,
-  centerDelay,
-  flowDuration = 280,
-  flowDelay,
+  plusDuration = MOTION_TIMING.yourModel.plusDuration,
+  plusDelay = MOTION_TIMING.yourModel.plusDelay,
+  flowDuration = MOTION_TIMING.yourModel.flowDuration,
+  flowDelay = MOTION_TIMING.yourModel.flowDelay,
 }) {
   const classes = ["your-model", className].filter(Boolean).join(" ");
-  const resolvedCenterDelay =
-    centerDelay ?? gridDelay + gridDuration - 80;
-  const resolvedFlowDelay =
-    flowDelay ?? resolvedCenterDelay + 20;
 
   return (
     <figure
       className={classes}
       aria-label={label}
       style={{
-        "--model-grid-duration": `${gridDuration}ms`,
-        "--model-grid-delay": `${gridDelay}ms`,
-        "--model-center-duration": `${centerDuration}ms`,
-        "--model-center-delay": `${resolvedCenterDelay}ms`,
+        "--model-plus-duration": `${plusDuration}ms`,
+        "--model-plus-delay": `${plusDelay}ms`,
         "--model-flow-duration": `${flowDuration}ms`,
-        "--model-flow-delay": `${resolvedFlowDelay}ms`,
+        "--model-flow-delay": `${flowDelay}ms`,
       }}
     >
       <ModelGrid />

@@ -6,68 +6,48 @@
   #Line_4,
   #Line_5,
   #Line_6,
-  #Line_7,
+  #Line_7 {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
   #Line_8,
   #Line_9 {
-    animation: circle-line-fade 360ms cubic-bezier(0.4, 0, 0.2, 1) both;
-    will-change: opacity;
+    display: none;
   }
 
   #Line_10,
   #Line_11 {
-    animation: circle-line-fade 360ms cubic-bezier(0.4, 0, 0.2, 1) both;
-    will-change: opacity;
+    transform-box: view-box;
+    transform-origin: 177.5px 164.5px;
+    will-change: transform;
   }
 
-  #Line_8,
   #Line_10 {
-    animation-delay: 120ms;
+    animation: circle-white-vertical-grow var(--production-traces-duration, 440ms) cubic-bezier(0.4, 0, 0.2, 1) var(--production-traces-delay, 120ms) both;
   }
 
-  #Line_9,
   #Line_11 {
-    animation-delay: 190ms;
+    animation: circle-white-diagonal var(--production-traces-duration, 440ms) cubic-bezier(0.4, 0, 0.2, 1) var(--production-traces-delay, 120ms) both;
   }
 
-  #Line_4,
-  #Line_7 {
-    animation-delay: 260ms;
+  @keyframes circle-white-vertical-grow {
+    from { transform: scale(0.804); }
+    to { transform: scale(1); }
   }
 
-  #Line_2 {
-    animation-delay: 330ms;
-  }
-
-  #Line_3,
-  #Line_6 {
-    animation-delay: 400ms;
-  }
-
-  #Line,
-  #Line_5 {
-    animation-delay: 470ms;
-  }
-
-  @keyframes circle-line-fade {
-    from { opacity: 0; }
-    to { opacity: 1; }
+  @keyframes circle-white-diagonal {
+    from { transform: rotate(-45deg) scale(0.804); }
+    to { transform: rotate(0deg) scale(1); }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    #Line,
-    #Line_2,
-    #Line_3,
-    #Line_4,
-    #Line_5,
-    #Line_6,
-    #Line_7,
-    #Line_8,
-    #Line_9,
     #Line_10,
     #Line_11 {
       animation: none;
       will-change: auto;
-      opacity: 1;
+      transform: rotate(0deg);
     }
   }
 </style>

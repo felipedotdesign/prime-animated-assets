@@ -37,23 +37,6 @@
 .your-model__grid-line {
   stroke: #2c2d2e;
   stroke-width: 0.5;
-  transform-box: fill-box;
-  transform-origin: center;
-  will-change: transform;
-}
-
-.your-model__grid-line--horizontal {
-  animation: your-model-grid-line-horizontal
-    var(--model-grid-duration, 720ms)
-    cubic-bezier(0.33, 1, 0.68, 1)
-    var(--model-grid-delay, 120ms) both;
-}
-
-.your-model__grid-line--vertical {
-  animation: your-model-grid-line-vertical
-    var(--model-grid-duration, 720ms)
-    cubic-bezier(0.33, 1, 0.68, 1)
-    var(--model-grid-delay, 120ms) both;
 }
 
 .your-model__label {
@@ -79,9 +62,6 @@
   height: 40px;
   background: #fff;
   pointer-events: none;
-  animation: your-model-center-in var(--model-center-duration, 240ms)
-    cubic-bezier(0.22, 1, 0.36, 1)
-    var(--model-center-delay, 760ms) both;
 }
 
 .your-model__plus {
@@ -90,6 +70,10 @@
   left: 11px;
   width: 18px;
   height: 18px;
+  transform-origin: center;
+  animation: your-model-plus-grow var(--model-plus-duration, 440ms)
+    cubic-bezier(0.22, 1, 0.36, 1)
+    var(--model-plus-delay, 80ms) both;
 }
 
 .your-model__plus::before,
@@ -115,83 +99,63 @@
 
 .your-model__flow--left {
   animation: your-model-flow-left var(--model-flow-duration, 280ms) linear
-    var(--model-flow-delay, 780ms) both;
+    var(--model-flow-delay, 120ms) both;
 }
 
 .your-model__flow--right {
   animation: your-model-flow-right var(--model-flow-duration, 280ms) linear
-    var(--model-flow-delay, 780ms) both;
+    var(--model-flow-delay, 120ms) both;
 }
 
-@keyframes your-model-grid-line-horizontal {
+@keyframes your-model-plus-grow {
   from {
-    transform: scaleX(0);
+    transform: scale(0.25);
   }
 
   to {
-    transform: scaleX(1);
-  }
-}
-
-@keyframes your-model-grid-line-vertical {
-  from {
-    transform: scaleY(0);
-  }
-
-  to {
-    transform: scaleY(1);
-  }
-}
-
-@keyframes your-model-center-in {
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
+    transform: scale(1);
   }
 }
 
 @keyframes your-model-flow-left {
   from {
     clip-path: inset(0 133.131px 0 133.082px);
+    filter: brightness(0.18);
   }
 
   to {
     clip-path: inset(0 133.131px 0 0);
+    filter: brightness(1);
   }
 }
 
 @keyframes your-model-flow-right {
   from {
     clip-path: inset(0 93.131px 0 173.082px);
+    filter: brightness(0.18);
   }
 
   to {
     clip-path: inset(0 0 0 173.082px);
+    filter: brightness(1);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .your-model__grid-line {
-    animation: none;
-    will-change: auto;
+  .your-model__plus {
     transform: none;
-  }
-
-  .your-model__center {
-    opacity: 1;
     animation: none;
   }
 
   .your-model__flow--left {
     clip-path: inset(0 133.131px 0 0);
+    filter: none;
     animation: none;
   }
 
   .your-model__flow--right {
     clip-path: inset(0 0 0 173.082px);
+    filter: none;
     animation: none;
   }
 }

@@ -47,11 +47,6 @@
   left: 0;
   width: 300px;
   border-top: 0.5px solid #2c2d2e;
-  animation: environments-grid-line-horizontal
-    var(--environments-grid-duration, 720ms)
-    cubic-bezier(0.33, 1, 0.68, 1)
-    var(--environments-grid-delay, 120ms) both;
-  will-change: transform;
 }
 
 .environments-grid__line--top-boundary {
@@ -71,11 +66,6 @@
 .environments-grid__line--top-vertical,
 .environments-grid__line--bottom-vertical {
   border-left: 0.5px solid #2c2d2e;
-  animation: environments-grid-line-vertical
-    var(--environments-grid-duration, 720ms)
-    cubic-bezier(0.33, 1, 0.68, 1)
-    var(--environments-grid-delay, 120ms) both;
-  will-change: transform;
 }
 
 .environments-grid__line--left-boundary {
@@ -149,64 +139,31 @@
   clip-path: inset(0 100% 0 0);
   color: #fff;
   animation: environments-stream-left-to-right
-    var(--environments-text-duration, 360ms) linear
-    var(--environments-label-delay, 760ms) both;
+    var(--environments-label-duration, 120ms)
+    steps(var(--environments-label-steps, 4), end)
+    var(--environments-label-delay, 100ms) both;
   will-change: clip-path;
 }
 
 .environments-grid__command {
   display: block;
   width: 100%;
-  opacity: 0;
+  opacity: 1;
   color: rgba(255, 255, 255, 0.6);
   font-size: 10px;
   font-weight: 400;
   line-height: 10px;
   text-transform: none;
   white-space: nowrap;
-  animation: environments-subtext-in
-    var(--environments-subtext-duration, 320ms)
-    cubic-bezier(0.33, 1, 0.68, 1)
-    var(--environments-command-delay, 760ms) both;
 }
 
 .environments-grid__prompt {
-  color: rgba(255, 255, 255, 0.4);
+  color: #57f857;
 }
 
 .environments-grid__command-text {
   display: inline-block;
-  clip-path: inset(0 100% 0 0);
-  animation: environments-stream-left-to-right
-    var(--environments-command-stream-duration, 360ms) linear
-    var(--environments-command-stream-delay, 1390ms) both;
-  will-change: clip-path;
-}
-
-@keyframes environments-grid-line-horizontal {
-  from {
-    transform: scaleX(0);
-  }
-
-  to {
-    transform: scaleX(1);
-  }
-}
-
-@keyframes environments-grid-line-vertical {
-  from {
-    transform: scaleY(0);
-  }
-
-  to {
-    transform: scaleY(1);
-  }
-}
-
-@keyframes environments-subtext-in {
-  to {
-    opacity: 1;
-  }
+  margin-left: 1ch;
 }
 
 @keyframes environments-stream-left-to-right {
@@ -216,26 +173,10 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .environments-grid__line {
-    animation: none;
-    will-change: auto;
-    transform: none;
-  }
-
   .environments-grid__label-text {
     clip-path: none;
     animation: none;
     will-change: auto;
   }
 
-  .environments-grid__command {
-    opacity: 1;
-    animation: none;
-  }
-
-  .environments-grid__command-text {
-    clip-path: none;
-    animation: none;
-    will-change: auto;
-  }
 }

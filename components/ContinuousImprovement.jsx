@@ -1,29 +1,14 @@
 import verticalOrbitUrl from "../assets/continuous-orbit-vertical.png?url";
 import horizontalOrbitUrl from "../assets/continuous-orbit-horizontal.png?url";
-import ringUrl from "../assets/continuous-orbit-ring.svg?url";
-import rightArrowUrl from "../assets/continuous-arrow-right.svg?url";
-import leftArrowUrl from "../assets/continuous-arrow-left.svg?url";
+import { MOTION_TIMING } from "./motionTiming";
 import "./ContinuousImprovement.css";
-
-function OrbitArrow({ side, src, nodeId }) {
-  return (
-    <span
-      className={`continuous-improvement__arrow continuous-improvement__arrow--${side}`}
-      data-node-id={nodeId}
-      aria-hidden="true"
-    >
-      <span className="continuous-improvement__arrow-transform">
-        <img src={src} alt="" />
-      </span>
-    </span>
-  );
-}
 
 export default function ContinuousImprovement({
   className = "",
   firstLine = "Continuos",
   secondLine = "Improvement",
-  orbitDuration = 900,
+  orbitDuration = MOTION_TIMING.continuousImprovement.dashDuration,
+  dotDuration = MOTION_TIMING.continuousImprovement.dotDuration,
 }) {
   const classes = ["continuous-improvement", className]
     .filter(Boolean)
@@ -94,23 +79,32 @@ export default function ContinuousImprovement({
           </svg>
         </span>
 
-        <img
+        <span
           className="continuous-improvement__ring"
-          src={ringUrl}
-          alt=""
+          aria-hidden="true"
           data-node-id="2466:8906"
         />
 
-        <OrbitArrow
-          side="right"
-          src={rightArrowUrl}
-          nodeId="2466:8907"
-        />
-        <OrbitArrow
-          side="left"
-          src={leftArrowUrl}
-          nodeId="2466:8908"
-        />
+        <svg
+          className="continuous-improvement__dot-layer"
+          viewBox="0 0 356 330"
+          aria-hidden="true"
+        >
+          <circle className="continuous-improvement__orbit-dot" r="5">
+            <animateMotion
+              dur={`${dotDuration}ms`}
+              repeatCount="indefinite"
+              path="M 181 55.5 A 55.5 109.5 0 1 0 181 274.5 A 55.5 109.5 0 1 0 181 55.5"
+            />
+          </circle>
+          <circle className="continuous-improvement__orbit-dot" r="5">
+            <animateMotion
+              dur={`${dotDuration}ms`}
+              repeatCount="indefinite"
+              path="M 181 125.5 A 109.5 39.5 0 1 1 181 204.5 A 109.5 39.5 0 1 1 181 125.5"
+            />
+          </circle>
+        </svg>
       </div>
 
       <figcaption

@@ -1,82 +1,25 @@
-import { useEffect, useState } from "react";
 import leftLineUrl from "../assets/behavior-line-left.svg?url";
 import rightLineUrl from "../assets/behavior-line-right.svg?url";
+import { MOTION_TIMING } from "./motionTiming";
 import "./CustomBehavior.css";
-
-const CODE_SYMBOLS = "<>/{}[]#@!$%&*+=?";
-
-function scrambleText(text, frame, revealed = 0) {
-  return [...text]
-    .map((character, index) => {
-      if (character === " ") return " ";
-      if (index < revealed) return character;
-      return CODE_SYMBOLS[(frame + index * 3) % CODE_SYMBOLS.length];
-    })
-    .join("");
-}
 
 export default function CustomBehavior({
   label = "Custom behavior",
   baseLabel = "Base model",
   className = "",
-  textDuration = 720,
-  textDelay = 120,
-  complete = false,
 }) {
-  const [displayLabel, setDisplayLabel] = useState(() =>
-    complete ? label : scrambleText(label, 0),
-  );
-  const [textActive, setTextActive] = useState(complete);
-  const classes = [
-    "custom-behavior",
-    textActive ? "custom-behavior--text-active" : "",
-    className,
-  ]
+  const classes = ["custom-behavior", className]
     .filter(Boolean)
     .join(" ");
-
-  useEffect(() => {
-    const reducedMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    ).matches;
-
-    if (complete || reducedMotion) {
-      setDisplayLabel(label);
-      setTextActive(true);
-      return undefined;
-    }
-
-    setDisplayLabel(scrambleText(label, 0));
-    setTextActive(false);
-    let frameId;
-    const start = performance.now();
-    const tick = (now) => {
-      const elapsed = now - start;
-      if (elapsed < textDelay) {
-        frameId = window.requestAnimationFrame(tick);
-        return;
-      }
-      setTextActive(true);
-      const activeElapsed = elapsed - textDelay;
-      const progress = Math.max(0, Math.min(activeElapsed / textDuration, 1));
-      const revealed = Math.floor(progress * label.length);
-      const frame = Math.floor(activeElapsed / 48);
-      setDisplayLabel(progress === 1 ? label : scrambleText(label, frame, revealed));
-      if (progress < 1) frameId = window.requestAnimationFrame(tick);
-    };
-
-    frameId = window.requestAnimationFrame(tick);
-
-    return () => {
-      if (frameId) window.cancelAnimationFrame(frameId);
-    };
-  }, [complete, label, textDelay, textDuration]);
 
   return (
     <figure
       className={classes}
       aria-label={`${label}, ${baseLabel}`}
-      style={{ "--behavior-text-duration": `${textDuration}ms` }}
+      style={{
+        "--custom-behavior-delay": `${MOTION_TIMING.customBehavior.delay}ms`,
+        "--custom-behavior-duration": `${MOTION_TIMING.customBehavior.duration}ms`,
+      }}
     >
       <div className="custom-behavior__boundary" aria-hidden="true">
         <svg viewBox="0 0 244 109" preserveAspectRatio="none">
@@ -93,8 +36,9 @@ export default function CustomBehavior({
         </svg>
       </div>
       <div className="custom-behavior__card">
+        <span className="custom-behavior__fill" aria-hidden="true" />
         <span className="custom-behavior__text" aria-hidden="true">
-          {displayLabel}
+          {label}
         </span>
       </div>
 

@@ -6,6 +6,7 @@ import dotUrl from "../assets/models-dot.svg?url";
 import lightItemsUrl from "../assets/models-items-light.svg?url";
 import darkItemsUrl from "../assets/models-items-dark.svg?url";
 import originUrl from "../assets/models-origin.svg?url";
+import { MOTION_TIMING } from "./motionTiming";
 import "./ModelsDiagram.css";
 
 const defaultModels = [
@@ -19,10 +20,10 @@ const defaultModels = [
 export default function ModelsDiagram({
   models = defaultModels,
   className = "",
-  flowDuration = 480,
-  flowDelay = 120,
-  branchStagger = 100,
-  dotDuration = 100,
+  flowDuration = MOTION_TIMING.models.flowDuration,
+  flowDelay = MOTION_TIMING.models.flowDelay,
+  branchStagger = MOTION_TIMING.models.branchStagger,
+  dotDuration = MOTION_TIMING.models.dotDuration,
 }) {
   const classes = ["models-diagram", className].filter(Boolean).join(" ");
 

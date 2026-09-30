@@ -4,9 +4,9 @@
 <rect width="40" height="40" transform="translate(133.082 7.53611)" fill="white"/>
 <path id="Vector 7920" d="M153.082 18.5361V36.5361M144.082 27.5361H162.082" stroke="black" stroke-width="1.5"/>
 </g>
-<path id="Vector" d="M133.082 7.45638H8.08227" stroke="white" stroke-width="0.75"/>
-<path id="Arrowhead left" d="M1.08227 7.45638L8.08227 3.45638V11.4564L1.08227 7.45638Z" fill="white"/>
-<path id="Vector_2" d="M173.082 47.4564H258.082" stroke="white" stroke-width="0.75"/>
-<path id="Arrowhead right" d="M265.082 47.4564L258.082 43.4564V51.4564L265.082 47.4564Z" fill="white"/>
+<path id="Vector" d="M133.082 7.45638H16.8323" stroke="white" stroke-width="0.75"/>
+<path id="Arrowhead left" d="M9.83227 7.45638L16.8323 3.45638V11.4564L9.83227 7.45638Z" fill="white"/>
+<path id="Vector_2" d="M173.082 47.4564H249.332" stroke="white" stroke-width="0.75"/>
+<path id="Arrowhead right" d="M256.332 47.4564L249.332 43.4564V51.4564L256.332 47.4564Z" fill="white"/>
 </g>
 </svg>

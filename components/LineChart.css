@@ -58,8 +58,8 @@
 
 .reward-line-chart__curve--active {
   clip-path: inset(0 100% 0 0);
-  animation: reward-line-chart-reveal var(--reward-line-duration, 1450ms)
-    linear var(--reward-line-delay, 150ms) forwards;
+  animation: reward-line-chart-reveal var(--reward-line-duration, 1340ms)
+    linear var(--reward-line-delay, 160ms) forwards;
 }
 
 @keyframes reward-line-chart-reveal {
@@ -80,7 +80,7 @@
   line-height: normal;
   white-space: nowrap;
   opacity: 0.24;
-  transition: opacity var(--reward-value-duration, 1450ms)
+  transition: opacity var(--reward-value-duration, 1340ms)
     cubic-bezier(0.4, 0, 0.2, 1);
 }
 

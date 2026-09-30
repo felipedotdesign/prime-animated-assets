@@ -1,3 +1,4 @@
+import { MOTION_TIMING } from "./motionTiming";
 import "./EnvironmentsGrid.css";
 
 const CELLS = [
@@ -35,7 +36,7 @@ const CELLS = [
   },
 ];
 
-function StreamingLabel({ label, delay, nodeId }) {
+function StreamingLabel({ label, delay, duration, nodeId }) {
   return (
     <span
       className="environments-grid__label"
@@ -44,7 +45,11 @@ function StreamingLabel({ label, delay, nodeId }) {
     >
       <span
         className="environments-grid__label-text"
-        style={{ "--environments-label-delay": `${delay}ms` }}
+        style={{
+          "--environments-label-delay": `${delay}ms`,
+          "--environments-label-duration": `${duration}ms`,
+          "--environments-label-steps": label.length,
+        }}
         aria-hidden="true"
       >
         {label}
@@ -53,12 +58,7 @@ function StreamingLabel({ label, delay, nodeId }) {
   );
 }
 
-function EnvironmentCell({
-  cell,
-  labelDelay,
-  commandDelay,
-  commandStreamDelay,
-}) {
+function EnvironmentCell({ cell, labelDelay, labelDuration }) {
   return (
     <div
       className={`environments-grid__cell ${cell.className}`}
@@ -67,21 +67,16 @@ function EnvironmentCell({
       <StreamingLabel
         label={cell.label}
         delay={labelDelay}
+        duration={labelDuration}
         nodeId={cell.labelNodeId}
       />
       <span
         className="environments-grid__command"
         data-node-id={cell.commandNodeId}
-        style={{ "--environments-command-delay": `${commandDelay}ms` }}
       >
         <span className="environments-grid__prompt">$</span>
-        <span
-          className="environments-grid__command-text"
-          style={{
-            "--environments-command-stream-delay": `${commandStreamDelay}ms`,
-          }}
-        >
-          {` ${cell.command}`}
+        <span className="environments-grid__command-text">
+          {cell.command}
         </span>
       </span>
     </div>
@@ -90,35 +85,25 @@ function EnvironmentCell({
 
 export default function EnvironmentsGrid({
   className = "",
-  gridDuration = 720,
-  gridDelay = 120,
-  textDuration = 360,
-  symbolDelay,
-  textDelay,
-  textStagger = 90,
-  subtextDuration = 320,
-  commandStreamDuration = 360,
-  commandStreamStagger = 120,
+  textDelay = MOTION_TIMING.environments.textDelay,
+  characterDuration = MOTION_TIMING.environments.characterDuration,
+  durationOffset = MOTION_TIMING.environments.durationOffset,
+  textGap = MOTION_TIMING.environments.textGap,
 }) {
   const classes = ["environments-grid", className].filter(Boolean).join(" ");
-  const resolvedSymbolDelay =
-    symbolDelay ?? gridDelay + gridDuration - 80;
-  const resolvedTextDelay = textDelay ?? resolvedSymbolDelay;
-  const resolvedLabelsCompleteDelay =
-    resolvedTextDelay + (CELLS.length - 1) * textStagger + textDuration;
+  let nextLabelDelay = textDelay;
+  const labelTimings = CELLS.map((cell) => {
+    const duration = cell.label.length * characterDuration + durationOffset;
+    const timing = { delay: nextLabelDelay, duration };
+    nextLabelDelay += duration + textGap;
+    return timing;
+  });
 
   return (
     <figure
       className={classes}
       aria-label="Prime environment commands"
       data-node-id="2516:23744"
-      style={{
-        "--environments-grid-duration": `${gridDuration}ms`,
-        "--environments-grid-delay": `${gridDelay}ms`,
-        "--environments-text-duration": `${textDuration}ms`,
-        "--environments-subtext-duration": `${subtextDuration}ms`,
-        "--environments-command-stream-duration": `${commandStreamDuration}ms`,
-      }}
     >
       <div
         className="environments-grid__stage"
@@ -140,11 +125,8 @@ export default function EnvironmentsGrid({
               <EnvironmentCell
                 key={cell.label}
                 cell={cell}
-                labelDelay={resolvedTextDelay + index * textStagger}
-                commandDelay={resolvedSymbolDelay}
-                commandStreamDelay={
-                  resolvedLabelsCompleteDelay + index * commandStreamStagger
-                }
+                labelDelay={labelTimings[index].delay}
+                labelDuration={labelTimings[index].duration}
               />
             ))}
           </div>
@@ -153,12 +135,8 @@ export default function EnvironmentsGrid({
               <EnvironmentCell
                 key={cell.label}
                 cell={cell}
-                labelDelay={resolvedTextDelay + (index + 2) * textStagger}
-                commandDelay={resolvedSymbolDelay}
-                commandStreamDelay={
-                  resolvedLabelsCompleteDelay +
-                  (index + 2) * commandStreamStagger
-                }
+                labelDelay={labelTimings[index + 2].delay}
+                labelDuration={labelTimings[index + 2].duration}
               />
             ))}
           </div>

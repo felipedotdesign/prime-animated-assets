@@ -38,8 +38,12 @@ function AnimationTile({ study }: { study: AnimationStudy }) {
     animations.forEach((animation) => {
       if (showCompletedFrame) {
         const endTime = Number(animation.effect?.getComputedTiming().endTime);
-        animation.currentTime = Number.isFinite(endTime) ? endTime : 0;
-        animation.pause();
+        if (Number.isFinite(endTime)) {
+          animation.currentTime = endTime;
+          animation.pause();
+        } else {
+          animation.play();
+        }
       } else {
         animation.cancel();
         animation.play();

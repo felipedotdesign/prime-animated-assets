@@ -2,13 +2,14 @@ import ringUrl from "../assets/diagram-ring.svg?url";
 import diagonalsUrl from "../assets/diagram-diagonals.svg?url";
 import centerUrl from "../assets/diagram-center.svg?url";
 import horizontalUrl from "../assets/diagram-horizontal.svg?url";
+import { MOTION_TIMING } from "./motionTiming";
 import "./ObservabilityDiagram.css";
 
 export default function ObservabilityDiagram({
   className = "",
-  animationDuration = 880,
-  animationDelay = 120,
-  crossDuration = 280,
+  animationDuration = MOTION_TIMING.observability.centerDuration,
+  animationDelay = MOTION_TIMING.observability.delay,
+  crossDuration = MOTION_TIMING.observability.crossDuration,
 }) {
   const classes = ["observability-diagram", className]
     .filter(Boolean)
