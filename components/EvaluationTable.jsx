@@ -6,10 +6,10 @@ import "./EvaluationTable.css";
 const defaultRows = [
   { answer: "1, 2, 3...", score: "0.42", scoreOpacity: 0.2 },
   { answer: "1, 2, 3...", score: "0.63", scoreOpacity: 0.3 },
-  { answer: "1, 2, 3...", score: "0.91", scoreOpacity: 1 },
-  { answer: "1, 2, 3...", score: "0.89", scoreOpacity: 1 },
   { answer: "1, 2, 3...", score: "0.74", scoreOpacity: 0.6 },
-  { answer: "1, 2, 3, 4...", score: "0.87", scoreOpacity: 1, active: true },
+  { answer: "1, 2, 3...", score: "0.87", scoreOpacity: 1 },
+  { answer: "1, 2, 3...", score: "0.89", scoreOpacity: 1 },
+  { answer: "1, 2, 3...", score: "0.91", scoreOpacity: 1 },
 ];
 
 export default function EvaluationTable({

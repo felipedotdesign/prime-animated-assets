@@ -94,21 +94,25 @@
 
 .continuous-improvement__orbit-path {
   fill: none;
-  stroke: #191a1a;
+  stroke: rgb(255 255 255 / 20%);
   stroke-width: 1.5;
-  stroke-dasharray: 4 4;
+  stroke-dasharray: 3 3;
   animation: continuous-improvement-orbit-flow
     var(--continuous-orbit-duration, 900ms) linear infinite;
   will-change: stroke-dashoffset;
 }
 
+.continuous-improvement__orbit-path--reverse {
+  animation-direction: reverse;
+}
+
 .continuous-improvement__orbit-dot {
-  fill: #fff;
+  fill: #999;
 }
 
 @keyframes continuous-improvement-orbit-flow {
   to {
-    stroke-dashoffset: -8;
+    stroke-dashoffset: -6;
   }
 }
 

@@ -60,10 +60,12 @@
 @keyframes observability-cross-expand {
   from {
     clip-path: circle(74px at 50% 50%);
+    opacity: 0;
   }
 
   to {
     clip-path: circle(128px at 50% 50%);
+    opacity: 1;
   }
 }
 

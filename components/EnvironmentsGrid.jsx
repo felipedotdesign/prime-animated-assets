@@ -36,38 +36,31 @@ const CELLS = [
   },
 ];
 
-function StreamingLabel({ label, delay, duration, nodeId }) {
+function EnvironmentLabel({ label, nodeId }) {
   return (
     <span
       className="environments-grid__label"
       data-node-id={nodeId}
       aria-label={label}
     >
-      <span
-        className="environments-grid__label-text"
-        style={{
-          "--environments-label-delay": `${delay}ms`,
-          "--environments-label-duration": `${duration}ms`,
-          "--environments-label-steps": label.length,
-        }}
-        aria-hidden="true"
-      >
+      <span className="environments-grid__label-text" aria-hidden="true">
         {label}
       </span>
     </span>
   );
 }
 
-function EnvironmentCell({ cell, labelDelay, labelDuration }) {
+function EnvironmentCell({ cell, commandDelay, characterDuration, durationOffset }) {
+  const commandDuration =
+    cell.command.length * characterDuration + durationOffset;
+
   return (
     <div
       className={`environments-grid__cell ${cell.className}`}
       data-node-id={cell.nodeId}
     >
-      <StreamingLabel
+      <EnvironmentLabel
         label={cell.label}
-        delay={labelDelay}
-        duration={labelDuration}
         nodeId={cell.labelNodeId}
       />
       <span
@@ -75,7 +68,14 @@ function EnvironmentCell({ cell, labelDelay, labelDuration }) {
         data-node-id={cell.commandNodeId}
       >
         <span className="environments-grid__prompt">$</span>
-        <span className="environments-grid__command-text">
+        <span
+          className="environments-grid__command-text"
+          style={{
+            "--environments-command-delay": `${commandDelay}ms`,
+            "--environments-command-duration": `${commandDuration}ms`,
+            "--environments-command-steps": cell.command.length,
+          }}
+        >
           {cell.command}
         </span>
       </span>
@@ -88,16 +88,8 @@ export default function EnvironmentsGrid({
   textDelay = MOTION_TIMING.environments.textDelay,
   characterDuration = MOTION_TIMING.environments.characterDuration,
   durationOffset = MOTION_TIMING.environments.durationOffset,
-  textGap = MOTION_TIMING.environments.textGap,
 }) {
   const classes = ["environments-grid", className].filter(Boolean).join(" ");
-  let nextLabelDelay = textDelay;
-  const labelTimings = CELLS.map((cell) => {
-    const duration = cell.label.length * characterDuration + durationOffset;
-    const timing = { delay: nextLabelDelay, duration };
-    nextLabelDelay += duration + textGap;
-    return timing;
-  });
 
   return (
     <figure
@@ -121,22 +113,24 @@ export default function EnvironmentsGrid({
 
         <div className="environments-grid__content">
           <div className="environments-grid__row" data-node-id="2466:8879">
-            {CELLS.slice(0, 2).map((cell, index) => (
+            {CELLS.slice(0, 2).map((cell) => (
               <EnvironmentCell
                 key={cell.label}
                 cell={cell}
-                labelDelay={labelTimings[index].delay}
-                labelDuration={labelTimings[index].duration}
+                commandDelay={textDelay}
+                characterDuration={characterDuration}
+                durationOffset={durationOffset}
               />
             ))}
           </div>
           <div className="environments-grid__row" data-node-id="2466:8886">
-            {CELLS.slice(2).map((cell, index) => (
+            {CELLS.slice(2).map((cell) => (
               <EnvironmentCell
                 key={cell.label}
                 cell={cell}
-                labelDelay={labelTimings[index + 2].delay}
-                labelDuration={labelTimings[index + 2].duration}
+                commandDelay={textDelay}
+                characterDuration={characterDuration}
+                durationOffset={durationOffset}
               />
             ))}
           </div>

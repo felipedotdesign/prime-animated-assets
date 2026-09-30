@@ -8,8 +8,8 @@ export const MOTION_TIMING = Object.freeze({
     duration: step(67),
   },
   evaluationTable: {
-    delay: step(18),
-    duration: step(50),
+    delay: step(14),
+    duration: step(52),
   },
   observability: {
     delay: step(6),
@@ -24,7 +24,7 @@ export const MOTION_TIMING = Object.freeze({
   },
   customBehavior: {
     delay: step(6),
-    duration: step(9),
+    duration: step(20),
   },
   models: {
     flowDelay: step(6),
@@ -44,6 +44,6 @@ export const MOTION_TIMING = Object.freeze({
   },
   continuousImprovement: {
     dashDuration: step(45),
-    dotDuration: step(420),
+    dotDuration: step(450),
   },
 });

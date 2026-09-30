@@ -23,15 +23,21 @@ export default function CustomBehavior({
     >
       <div className="custom-behavior__boundary" aria-hidden="true">
         <svg viewBox="0 0 244 109" preserveAspectRatio="none">
-          <rect
-            x="0.75"
-            y="0.75"
-            width="242.5"
-            height="107.5"
-            fill="none"
-            stroke="#191a1a"
-            strokeWidth="1.5"
-            strokeDasharray="4 4"
+          <path
+            className="custom-behavior__boundary-path custom-behavior__boundary-path--vertical"
+            d="M 0.75 108.25 V 0.75"
+          />
+          <path
+            className="custom-behavior__boundary-path custom-behavior__boundary-path--horizontal"
+            d="M 0.75 108.25 H 243.25"
+          />
+          <path
+            className="custom-behavior__boundary-path custom-behavior__boundary-path--horizontal"
+            d="M 243.25 0.75 H 0.75"
+          />
+          <path
+            className="custom-behavior__boundary-path custom-behavior__boundary-path--vertical"
+            d="M 243.25 0.75 V 108.25"
           />
         </svg>
       </div>

@@ -8,7 +8,6 @@ import ObservabilityDiagram from '../components/ObservabilityDiagram';
 import YourModel from '../components/YourModel';
 import CustomBehavior from '../components/CustomBehavior';
 import ModelsDiagram from '../components/ModelsDiagram';
-import RadialCircle from '../components/RadialCircle';
 import EnvironmentsGrid from '../components/EnvironmentsGrid';
 import ContinuousImprovement from '../components/ContinuousImprovement';
 import './page.css';
@@ -23,7 +22,7 @@ const studies: AnimationStudy[] = [
   { id: 'your-model', label: 'Your model', render: () => <YourModel /> },
   { id: 'custom-behavior', label: 'Custom behavior', render: (complete) => <CustomBehavior complete={complete} /> },
   { id: 'models', label: 'Models', render: () => <ModelsDiagram /> },
-  { id: 'production-traces', label: 'Production traces', render: () => <RadialCircle /> },
+  { id: 'production-traces', label: 'Production traces', render: () => null },
   { id: 'environments', label: 'Environments', render: () => <EnvironmentsGrid /> },
   { id: 'continuous-improvement', label: 'Continuous improvement', render: () => <ContinuousImprovement /> },
 ];

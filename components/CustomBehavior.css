@@ -32,6 +32,27 @@
   height: 100%;
 }
 
+.custom-behavior__boundary-path {
+  fill: none;
+  stroke: #191a1a;
+  stroke-width: 1.5;
+  stroke-dasharray: var(--custom-behavior-path-length);
+  stroke-dashoffset: var(--custom-behavior-path-length);
+  vector-effect: non-scaling-stroke;
+  animation: custom-behavior-boundary-draw
+    var(--custom-behavior-duration, 220ms) linear
+    var(--custom-behavior-delay, 120ms) both;
+  will-change: stroke-dashoffset;
+}
+
+.custom-behavior__boundary-path--horizontal {
+  --custom-behavior-path-length: 243;
+}
+
+.custom-behavior__boundary-path--vertical {
+  --custom-behavior-path-length: 108;
+}
+
 .custom-behavior__card {
   position: absolute;
   top: 122px;
@@ -56,13 +77,9 @@
   inset: 1px;
   display: block;
   background: #fff;
-  opacity: 0;
-  transform: scaleY(0);
-  transform-origin: center top;
-  animation: custom-behavior-fill-down
-    var(--custom-behavior-duration, 180ms) linear
-    var(--custom-behavior-delay, 120ms) both;
-  will-change: transform, opacity;
+  opacity: 1;
+  transform: none;
+  animation: none;
 }
 
 .custom-behavior__text {
@@ -117,22 +134,19 @@
   white-space: nowrap;
 }
 
-@keyframes custom-behavior-fill-down {
+@keyframes custom-behavior-boundary-draw {
   from {
-    opacity: 0;
-    transform: scaleY(0);
+    stroke-dashoffset: var(--custom-behavior-path-length);
   }
 
   to {
-    opacity: 1;
-    transform: scaleY(1);
+    stroke-dashoffset: 0;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .custom-behavior__fill {
-    opacity: 1;
-    transform: scaleY(1);
+  .custom-behavior__boundary-path {
+    stroke-dashoffset: 0;
     animation: none;
   }
 }

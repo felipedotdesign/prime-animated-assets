@@ -18,10 +18,10 @@
 
 .environments-grid__stage {
   position: absolute;
-  top: 45px;
-  left: 28px;
-  width: 300px;
-  height: 240px;
+  top: 29px;
+  left: 5px;
+  width: 346px;
+  height: 272px;
 }
 
 .environments-grid__lines,
@@ -45,7 +45,7 @@
 .environments-grid__line--bottom-boundary,
 .environments-grid__line--horizontal {
   left: 0;
-  width: 300px;
+  width: 346px;
   border-top: 0.5px solid #2c2d2e;
 }
 
@@ -54,11 +54,11 @@
 }
 
 .environments-grid__line--horizontal {
-  top: 119.75px;
+  top: 135.75px;
 }
 
 .environments-grid__line--bottom-boundary {
-  top: 239.5px;
+  top: 271.5px;
 }
 
 .environments-grid__line--left-boundary,
@@ -71,25 +71,25 @@
 .environments-grid__line--left-boundary {
   top: 0;
   left: 0;
-  height: 240px;
+  height: 272px;
 }
 
 .environments-grid__line--right-boundary {
   top: 0;
-  left: 299.5px;
-  height: 240px;
+  left: 345.5px;
+  height: 272px;
 }
 
 .environments-grid__line--top-vertical {
   top: 0;
-  left: 179.75px;
-  height: 120px;
+  left: 209.75px;
+  height: 136px;
 }
 
 .environments-grid__line--bottom-vertical {
-  top: 120px;
-  left: 119.75px;
-  height: 120px;
+  top: 136px;
+  left: 135.75px;
+  height: 136px;
 }
 
 .environments-grid__content {
@@ -99,12 +99,12 @@
 .environments-grid__row {
   display: flex;
   width: 100%;
-  height: 120px;
+  height: 136px;
 }
 
 .environments-grid__cell {
   display: flex;
-  height: 120px;
+  height: 136px;
   flex-direction: column;
   align-items: flex-start;
   justify-content: space-between;
@@ -119,15 +119,15 @@
 
 .environments-grid__cell--init,
 .environments-grid__cell--eval {
-  width: 120px;
-  flex: 0 0 120px;
+  width: 136px;
+  flex: 0 0 136px;
 }
 
 .environments-grid__label {
   position: relative;
   display: block;
   width: 100%;
-  font-size: 11px;
+  font-size: 12px;
   line-height: 16px;
   text-transform: uppercase;
   white-space: nowrap;
@@ -136,13 +136,7 @@
 .environments-grid__label-text {
   display: inline-block;
   width: auto;
-  clip-path: inset(0 100% 0 0);
   color: #fff;
-  animation: environments-stream-left-to-right
-    var(--environments-label-duration, 120ms)
-    steps(var(--environments-label-steps, 4), end)
-    var(--environments-label-delay, 100ms) both;
-  will-change: clip-path;
 }
 
 .environments-grid__command {
@@ -150,9 +144,9 @@
   width: 100%;
   opacity: 1;
   color: rgba(255, 255, 255, 0.6);
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 400;
-  line-height: 10px;
+  line-height: 16px;
   text-transform: none;
   white-space: nowrap;
 }
@@ -164,16 +158,22 @@
 .environments-grid__command-text {
   display: inline-block;
   margin-left: 1ch;
+  clip-path: inset(0 100% 0 0);
+  animation: environments-terminal-type
+    var(--environments-command-duration, 320ms)
+    steps(var(--environments-command-steps, 14), end)
+    var(--environments-command-delay, 100ms) both;
+  will-change: clip-path;
 }
 
-@keyframes environments-stream-left-to-right {
+@keyframes environments-terminal-type {
   to {
     clip-path: inset(0 0 0 0);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .environments-grid__label-text {
+  .environments-grid__command-text {
     clip-path: none;
     animation: none;
     will-change: auto;

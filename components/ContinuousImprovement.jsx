@@ -43,7 +43,7 @@ export default function ContinuousImprovement({
             preserveAspectRatio="none"
           >
             <ellipse
-              className="continuous-improvement__orbit-path"
+              className="continuous-improvement__orbit-path continuous-improvement__orbit-path--reverse"
               cx="56"
               cy="110"
               rx="55.5"

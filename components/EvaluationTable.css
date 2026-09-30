@@ -45,9 +45,12 @@
 
 .evaluation-table__icon {
   display: block;
-  width: 28.3322px;
+  width: 10px;
   height: 9px;
   flex: none;
+  object-fit: none;
+  object-position: left center;
+  overflow: hidden;
 }
 
 .evaluation-table__rows {

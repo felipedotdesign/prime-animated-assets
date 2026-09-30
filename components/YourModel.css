@@ -45,6 +45,7 @@
   left: 178px;
   line-height: 16px;
   white-space: nowrap;
+  visibility: hidden;
 }
 
 .your-model__flow {
@@ -71,9 +72,8 @@
   width: 18px;
   height: 18px;
   transform-origin: center;
-  animation: your-model-plus-grow var(--model-plus-duration, 440ms)
-    cubic-bezier(0.22, 1, 0.36, 1)
-    var(--model-plus-delay, 80ms) both;
+  transform: scale(1);
+  animation: none;
 }
 
 .your-model__plus::before,
