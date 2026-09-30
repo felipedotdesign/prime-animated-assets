@@ -1,4 +1,4 @@
-import { useEffect, useId, useRef, useState } from "react";
+import { useEffect, useId, useState } from "react";
 import guideWideUrl from "../assets/guide-wide.svg?url";
 import guideShortUrl from "../assets/guide-short.svg?url";
 import referenceTickUrl from "../assets/reference-tick.svg?url";
@@ -17,13 +17,12 @@ export default function LineChart({
   animationDelay = 150,
   valueCountDelay = 150,
   valueCountDuration = 1450,
-  paused = false,
+  complete = false,
 }) {
   const titleId = useId();
   const descriptionId = useId();
-  const [displayValue, setDisplayValue] = useState("0.00");
-  const [valueActive, setValueActive] = useState(false);
-  const pausedRef = useRef(paused);
+  const [displayValue, setDisplayValue] = useState(() => complete ? value : "0.00");
+  const [valueActive, setValueActive] = useState(complete);
   const classes = [
     "reward-line-chart",
     valueActive ? "reward-line-chart--value-active" : "",
@@ -33,16 +32,12 @@ export default function LineChart({
     .join(" ");
 
   useEffect(() => {
-    pausedRef.current = paused;
-  }, [paused]);
-
-  useEffect(() => {
     const target = Number.parseFloat(value);
     const reducedMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)",
     ).matches;
 
-    if (Number.isNaN(target) || reducedMotion) {
+    if (complete || Number.isNaN(target) || reducedMotion) {
       setDisplayValue(Number.isNaN(target) ? value : target.toFixed(2));
       setValueActive(true);
       return undefined;
@@ -52,22 +47,8 @@ export default function LineChart({
     setValueActive(false);
     let frameId;
     const start = performance.now();
-    let pausedAt = pausedRef.current ? start : null;
-    let pausedDuration = 0;
-
     const tick = (now) => {
-      if (pausedRef.current) {
-        pausedAt ??= now;
-        frameId = window.requestAnimationFrame(tick);
-        return;
-      }
-
-      if (pausedAt !== null) {
-        pausedDuration += now - pausedAt;
-        pausedAt = null;
-      }
-
-      const elapsed = now - start - pausedDuration;
+      const elapsed = now - start;
       if (elapsed < valueCountDelay) {
         frameId = window.requestAnimationFrame(tick);
         return;
@@ -86,7 +67,7 @@ export default function LineChart({
     return () => {
       if (frameId) window.cancelAnimationFrame(frameId);
     };
-  }, [value, valueCountDelay, valueCountDuration]);
+  }, [complete, value, valueCountDelay, valueCountDuration]);
 
   return (
     <figure

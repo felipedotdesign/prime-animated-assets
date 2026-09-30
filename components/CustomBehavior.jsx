@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import leftLineUrl from "../assets/behavior-line-left.svg?url";
 import rightLineUrl from "../assets/behavior-line-right.svg?url";
 import "./CustomBehavior.css";
@@ -21,13 +21,12 @@ export default function CustomBehavior({
   className = "",
   textDuration = 720,
   textDelay = 120,
-  paused = false,
+  complete = false,
 }) {
   const [displayLabel, setDisplayLabel] = useState(() =>
-    scrambleText(label, 0),
+    complete ? label : scrambleText(label, 0),
   );
-  const [textActive, setTextActive] = useState(false);
-  const pausedRef = useRef(paused);
+  const [textActive, setTextActive] = useState(complete);
   const classes = [
     "custom-behavior",
     textActive ? "custom-behavior--text-active" : "",
@@ -37,15 +36,11 @@ export default function CustomBehavior({
     .join(" ");
 
   useEffect(() => {
-    pausedRef.current = paused;
-  }, [paused]);
-
-  useEffect(() => {
     const reducedMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)",
     ).matches;
 
-    if (reducedMotion) {
+    if (complete || reducedMotion) {
       setDisplayLabel(label);
       setTextActive(true);
       return undefined;
@@ -55,20 +50,8 @@ export default function CustomBehavior({
     setTextActive(false);
     let frameId;
     const start = performance.now();
-    let pausedAt = pausedRef.current ? start : null;
-    let pausedDuration = 0;
-
     const tick = (now) => {
-      if (pausedRef.current) {
-        pausedAt ??= now;
-        frameId = window.requestAnimationFrame(tick);
-        return;
-      }
-      if (pausedAt !== null) {
-        pausedDuration += now - pausedAt;
-        pausedAt = null;
-      }
-      const elapsed = now - start - pausedDuration;
+      const elapsed = now - start;
       if (elapsed < textDelay) {
         frameId = window.requestAnimationFrame(tick);
         return;
@@ -87,7 +70,7 @@ export default function CustomBehavior({
     return () => {
       if (frameId) window.cancelAnimationFrame(frameId);
     };
-  }, [label, textDelay, textDuration]);
+  }, [complete, label, textDelay, textDuration]);
 
   return (
     <figure

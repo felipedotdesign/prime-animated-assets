@@ -1,7 +1,7 @@
 'use client';
 
 import type { ReactNode } from 'react';
-import { useEffect, useRef, useState } from 'react';
+import { useLayoutEffect, useRef, useState } from 'react';
 import LineChart from '../components/LineChart';
 import EvaluationTable from '../components/EvaluationTable';
 import ObservabilityDiagram from '../components/ObservabilityDiagram';
@@ -13,15 +13,15 @@ import EnvironmentsGrid from '../components/EnvironmentsGrid';
 import ContinuousImprovement from '../components/ContinuousImprovement';
 import './page.css';
 
-type AnimationRender = (paused: boolean) => ReactNode;
+type AnimationRender = (complete: boolean) => ReactNode;
 type AnimationStudy = { id: string; label: string; render: AnimationRender };
 
 const studies: AnimationStudy[] = [
-  { id: 'line-chart', label: 'Reward curve', render: (paused) => <LineChart paused={paused} /> },
-  { id: 'evaluation-table', label: 'Evaluation table', render: (paused) => <EvaluationTable paused={paused} /> },
+  { id: 'line-chart', label: 'Reward curve', render: (complete) => <LineChart complete={complete} /> },
+  { id: 'evaluation-table', label: 'Evaluation table', render: (complete) => <EvaluationTable complete={complete} /> },
   { id: 'observability', label: 'Observability', render: () => <ObservabilityDiagram /> },
   { id: 'your-model', label: 'Your model', render: () => <YourModel /> },
-  { id: 'custom-behavior', label: 'Custom behavior', render: (paused) => <CustomBehavior paused={paused} /> },
+  { id: 'custom-behavior', label: 'Custom behavior', render: (complete) => <CustomBehavior complete={complete} /> },
   { id: 'models', label: 'Models', render: () => <ModelsDiagram /> },
   { id: 'production-traces', label: 'Production traces', render: () => <RadialCircle /> },
   { id: 'environments', label: 'Environments', render: () => <EnvironmentsGrid /> },
@@ -29,17 +29,26 @@ const studies: AnimationStudy[] = [
 ];
 
 function AnimationTile({ study }: { study: AnimationStudy }) {
-  const [paused, setPaused] = useState(true);
+  const [showCompletedFrame, setShowCompletedFrame] = useState(true);
   const [revision, setRevision] = useState(0);
   const stageRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const animations = stageRef.current?.getAnimations({ subtree: true }) ?? [];
-    animations.forEach((animation) => paused ? animation.pause() : animation.play());
-  }, [paused, revision]);
+    animations.forEach((animation) => {
+      if (showCompletedFrame) {
+        const endTime = Number(animation.effect?.getComputedTiming().endTime);
+        animation.currentTime = Number.isFinite(endTime) ? endTime : 0;
+        animation.pause();
+      } else {
+        animation.cancel();
+        animation.play();
+      }
+    });
+  }, [showCompletedFrame, revision]);
 
-  function reset() {
-    setPaused(true);
+  function replay() {
+    setShowCompletedFrame(false);
     setRevision((value) => value + 1);
   }
 
@@ -47,13 +56,12 @@ function AnimationTile({ study }: { study: AnimationStudy }) {
     <article className="animation-tile">
       <header className="animation-tile__header">
         <h2>{study.label}</h2>
-        <div className="animation-tile__actions" aria-label={`${study.label} animation controls`}>
-          <button type="button" onClick={() => setPaused(false)}>Play</button>
-          <button type="button" onClick={reset}>Reset</button>
+        <div className="animation-tile__actions" aria-label={`${study.label} animation control`}>
+          <button type="button" onClick={replay}>Play</button>
         </div>
       </header>
-      <div ref={stageRef} className={`animation-tile__stage${paused ? ' is-paused' : ''}`}>
-        <div key={revision}>{study.render(paused)}</div>
+      <div ref={stageRef} className="animation-tile__stage">
+        <div key={revision}>{study.render(showCompletedFrame)}</div>
       </div>
     </article>
   );

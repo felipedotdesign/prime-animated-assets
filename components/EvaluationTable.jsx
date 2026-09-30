@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import tableIconUrl from "../assets/table-icon.svg?url";
 import "./EvaluationTable.css";
 
@@ -17,11 +17,10 @@ export default function EvaluationTable({
   className = "",
   countDelay = 350,
   countDuration = 1100,
-  paused = false,
+  complete = false,
 }) {
-  const [scores, setScores] = useState(() => rows.map(() => "0.00"));
-  const [scoresActive, setScoresActive] = useState(false);
-  const pausedRef = useRef(paused);
+  const [scores, setScores] = useState(() => rows.map((row) => complete ? row.score : "0.00"));
+  const [scoresActive, setScoresActive] = useState(complete);
   const classes = [
     "evaluation-table",
     scoresActive ? "evaluation-table--scores-active" : "",
@@ -31,15 +30,11 @@ export default function EvaluationTable({
     .join(" ");
 
   useEffect(() => {
-    pausedRef.current = paused;
-  }, [paused]);
-
-  useEffect(() => {
     const reducedMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)",
     ).matches;
 
-    if (reducedMotion) {
+    if (complete || reducedMotion) {
       setScores(rows.map((row) => row.score));
       setScoresActive(true);
       return undefined;
@@ -49,20 +44,8 @@ export default function EvaluationTable({
     setScoresActive(false);
     let frameId;
     const start = performance.now();
-    let pausedAt = pausedRef.current ? start : null;
-    let pausedDuration = 0;
-
     const tick = (now) => {
-      if (pausedRef.current) {
-        pausedAt ??= now;
-        frameId = window.requestAnimationFrame(tick);
-        return;
-      }
-      if (pausedAt !== null) {
-        pausedDuration += now - pausedAt;
-        pausedAt = null;
-      }
-      const elapsed = now - start - pausedDuration;
+      const elapsed = now - start;
       if (elapsed < countDelay) {
         frameId = window.requestAnimationFrame(tick);
         return;
@@ -79,7 +62,7 @@ export default function EvaluationTable({
     return () => {
       if (frameId) window.cancelAnimationFrame(frameId);
     };
-  }, [rows, countDelay, countDuration]);
+  }, [complete, rows, countDelay, countDuration]);
 
   return (
     <section className={classes} aria-label={`${name} evaluations`}>
