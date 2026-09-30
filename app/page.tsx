@@ -48,7 +48,7 @@ function AnimationTile({ study }: { study: AnimationStudy }) {
       <header className="animation-tile__header">
         <h2>{study.label}</h2>
         <div className="animation-tile__actions" aria-label={`${study.label} animation controls`}>
-          <button type="button" onClick={() => setPaused((value) => !value)}>{paused ? 'Play' : 'Pause'}</button>
+          <button type="button" onClick={() => setPaused(false)}>Play</button>
           <button type="button" onClick={reset}>Reset</button>
         </div>
       </header>
