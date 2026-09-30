@@ -1,4 +1,4 @@
-import flowUrl from "../assets/model-flow.svg";
+import flowUrl from "../assets/model-flow.svg?url";
 import "./YourModel.css";
 
 const GRID_COLUMNS = [0.25, 40.9668, 79.9633, 120.107, 160.25];

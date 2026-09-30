@@ -1,11 +1,11 @@
-import upperInnerBranchUrl from "../assets/models-branch-upper-inner.svg";
-import outerBranchUrl from "../assets/models-branch-outer.svg";
-import lowerInnerBranchUrl from "../assets/models-branch-lower-inner.svg";
-import middleBranchUrl from "../assets/models-branch-middle.svg";
-import dotUrl from "../assets/models-dot.svg";
-import lightItemsUrl from "../assets/models-items-light.svg";
-import darkItemsUrl from "../assets/models-items-dark.svg";
-import originUrl from "../assets/models-origin.svg";
+import upperInnerBranchUrl from "../assets/models-branch-upper-inner.svg?url";
+import outerBranchUrl from "../assets/models-branch-outer.svg?url";
+import lowerInnerBranchUrl from "../assets/models-branch-lower-inner.svg?url";
+import middleBranchUrl from "../assets/models-branch-middle.svg?url";
+import dotUrl from "../assets/models-dot.svg?url";
+import lightItemsUrl from "../assets/models-items-light.svg?url";
+import darkItemsUrl from "../assets/models-items-dark.svg?url";
+import originUrl from "../assets/models-origin.svg?url";
 import "./ModelsDiagram.css";
 
 const defaultModels = [

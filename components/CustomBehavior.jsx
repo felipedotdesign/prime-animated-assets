@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
-import leftLineUrl from "../assets/behavior-line-left.svg";
-import rightLineUrl from "../assets/behavior-line-right.svg";
+import leftLineUrl from "../assets/behavior-line-left.svg?url";
+import rightLineUrl from "../assets/behavior-line-right.svg?url";
 import "./CustomBehavior.css";
 
 const CODE_SYMBOLS = "<>/{}[]#@!$%&*+=?";

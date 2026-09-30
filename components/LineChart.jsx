@@ -1,8 +1,8 @@
 import { useEffect, useId, useRef, useState } from "react";
-import guideWideUrl from "../assets/guide-wide.svg";
-import guideShortUrl from "../assets/guide-short.svg";
-import referenceTickUrl from "../assets/reference-tick.svg";
-import rewardCurveUrl from "../assets/reward-curve.svg";
+import guideWideUrl from "../assets/guide-wide.svg?url";
+import guideShortUrl from "../assets/guide-short.svg?url";
+import referenceTickUrl from "../assets/reference-tick.svg?url";
+import rewardCurveUrl from "../assets/reward-curve.svg?url";
 import "./LineChart.css";
 
 /**

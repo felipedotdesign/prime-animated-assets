@@ -1,4 +1,4 @@
-import circleUrl from "../assets/circle-motion.svg";
+import circleUrl from "../assets/circle-motion.svg?url";
 import "./RadialCircle.css";
 
 export default function RadialCircle({ className = "" }) {

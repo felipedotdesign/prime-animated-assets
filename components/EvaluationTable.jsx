@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import tableIconUrl from "../assets/table-icon.svg";
+import tableIconUrl from "../assets/table-icon.svg?url";
 import "./EvaluationTable.css";
 
 const defaultRows = [

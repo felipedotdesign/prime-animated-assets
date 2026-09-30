@@ -1,8 +1,8 @@
-import verticalOrbitUrl from "../assets/continuous-orbit-vertical.png";
-import horizontalOrbitUrl from "../assets/continuous-orbit-horizontal.png";
-import ringUrl from "../assets/continuous-orbit-ring.svg";
-import rightArrowUrl from "../assets/continuous-arrow-right.svg";
-import leftArrowUrl from "../assets/continuous-arrow-left.svg";
+import verticalOrbitUrl from "../assets/continuous-orbit-vertical.png?url";
+import horizontalOrbitUrl from "../assets/continuous-orbit-horizontal.png?url";
+import ringUrl from "../assets/continuous-orbit-ring.svg?url";
+import rightArrowUrl from "../assets/continuous-arrow-right.svg?url";
+import leftArrowUrl from "../assets/continuous-arrow-left.svg?url";
 import "./ContinuousImprovement.css";
 
 function OrbitArrow({ side, src, nodeId }) {

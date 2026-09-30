@@ -1,7 +1,7 @@
-import ringUrl from "../assets/diagram-ring.svg";
-import diagonalsUrl from "../assets/diagram-diagonals.svg";
-import centerUrl from "../assets/diagram-center.svg";
-import horizontalUrl from "../assets/diagram-horizontal.svg";
+import ringUrl from "../assets/diagram-ring.svg?url";
+import diagonalsUrl from "../assets/diagram-diagonals.svg?url";
+import centerUrl from "../assets/diagram-center.svg?url";
+import horizontalUrl from "../assets/diagram-horizontal.svg?url";
 import "./ObservabilityDiagram.css";
 
 export default function ObservabilityDiagram({
