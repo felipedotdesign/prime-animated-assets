@@ -10,6 +10,10 @@ import CustomBehavior from '../components/CustomBehavior';
 import ModelsDiagram from '../components/ModelsDiagram';
 import EnvironmentsGrid from '../components/EnvironmentsGrid';
 import ContinuousImprovement from '../components/ContinuousImprovement';
+import TrainingDashboard from '../components/TrainingDashboard';
+import InferenceDashboard from '../components/InferenceDashboard';
+import ClusterDashboard from '../components/ClusterDashboard';
+import UiPreview from '../components/UiPreview';
 import './page.css';
 
 type AnimationRender = (complete: boolean) => ReactNode;
@@ -25,6 +29,12 @@ const studies: AnimationStudy[] = [
   { id: 'production-traces', label: 'Production traces', render: () => null },
   { id: 'environments', label: 'Environments', render: () => <EnvironmentsGrid /> },
   { id: 'continuous-improvement', label: 'Continuous improvement', render: () => <ContinuousImprovement /> },
+];
+
+const uiStudies = [
+  { id: 'training-ui', label: 'Training overview', width: 1280, height: 824, component: <TrainingDashboard /> },
+  { id: 'inference-ui', label: 'Inference', width: 1280, height: 655, component: <InferenceDashboard /> },
+  { id: 'cluster-ui', label: 'Cluster overview', width: 1280, height: 796, component: <ClusterDashboard /> },
 ];
 
 function AnimationTile({ study }: { study: AnimationStudy }) {
@@ -71,14 +81,45 @@ function AnimationTile({ study }: { study: AnimationStudy }) {
 }
 
 export default function Home() {
+  const [activeTab, setActiveTab] = useState<'diagrams' | 'ui'>('diagrams');
+
   return (
-    <main className="motion-gallery">
+    <main className={`motion-gallery${activeTab === 'ui' ? ' motion-gallery--ui' : ''}`}>
       <header className="motion-gallery__intro">
         <h1>Animation gallery</h1>
       </header>
-      <section className="motion-gallery__grid" aria-label="Animation studies">
-        {studies.map((study) => <AnimationTile key={study.id} study={study} />)}
-      </section>
+      <nav className="motion-gallery__tabs" role="tablist" aria-label="Gallery sections">
+        <button
+          type="button"
+          role="tab"
+          aria-selected={activeTab === 'diagrams'}
+          className={activeTab === 'diagrams' ? 'is-active' : ''}
+          onClick={() => setActiveTab('diagrams')}
+        >Diagrams</button>
+        <button
+          type="button"
+          role="tab"
+          aria-selected={activeTab === 'ui'}
+          className={activeTab === 'ui' ? 'is-active' : ''}
+          onClick={() => setActiveTab('ui')}
+        >UI</button>
+      </nav>
+      {activeTab === 'diagrams' ? (
+        <section className="motion-gallery__grid" role="tabpanel" aria-label="Animation studies">
+          {studies.map((study) => <AnimationTile key={study.id} study={study} />)}
+        </section>
+      ) : (
+        <section className="motion-gallery__ui" role="tabpanel" aria-label="UI studies">
+          {uiStudies.map((study) => (
+            <article className="ui-study" key={study.id}>
+              <header className="ui-study__header"><h2>{study.label}</h2></header>
+              <UiPreview width={study.width} height={study.height} label={`${study.label} interface`}>
+                {study.component}
+              </UiPreview>
+            </article>
+          ))}
+        </section>
+      )}
     </main>
   );
 }

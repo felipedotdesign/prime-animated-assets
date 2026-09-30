@@ -1,0 +1,11 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="12.25" height="12.25" viewBox="0 0 12.25 12.25" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="calendar-days">
+<path id="vector" d="M0.895829 0.895833H11.1042V3.44792V11.1042H0.895829V3.44792V0.895833Z" stroke="#737373" stroke-width="0.875" stroke-linecap="square"/>
+<path id="vector_2" d="M0.895829 3.44792H11.1042" stroke="#737373" stroke-width="0.875" stroke-linecap="square"/>
+<path id="vector_3" d="M3.44792 6H3.4543" stroke="#737373" stroke-width="1.09375" stroke-linecap="square"/>
+<path id="vector_4" d="M3.44792 8.55208H3.4543" stroke="#737373" stroke-width="1.09375" stroke-linecap="square"/>
+<path id="vector_5" d="M6 6H6.00638" stroke="#737373" stroke-width="1.09375" stroke-linecap="square"/>
+<path id="vector_6" d="M8.55208 6H8.55846" stroke="#737373" stroke-width="1.09375" stroke-linecap="square"/>
+<path id="vector_7" d="M6 8.55208H6.00638" stroke="#737373" stroke-width="1.09375" stroke-linecap="square"/>
+</g>
+</svg>
