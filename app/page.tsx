@@ -29,7 +29,7 @@ const studies: AnimationStudy[] = [
 ];
 
 function AnimationTile({ study }: { study: AnimationStudy }) {
-  const [paused, setPaused] = useState(false);
+  const [paused, setPaused] = useState(true);
   const [revision, setRevision] = useState(0);
   const stageRef = useRef<HTMLDivElement>(null);
 
@@ -39,7 +39,7 @@ function AnimationTile({ study }: { study: AnimationStudy }) {
   }, [paused, revision]);
 
   function reset() {
-    setPaused(false);
+    setPaused(true);
     setRevision((value) => value + 1);
   }
 
@@ -63,9 +63,7 @@ export default function Home() {
   return (
     <main className="motion-gallery">
       <header className="motion-gallery__intro">
-        <p>Prime Lab / Motion studies</p>
         <h1>Animation gallery</h1>
-        <span>Play, pause, or reset each study independently.</span>
       </header>
       <section className="motion-gallery__grid" aria-label="Animation studies">
         {studies.map((study) => <AnimationTile key={study.id} study={study} />)}
