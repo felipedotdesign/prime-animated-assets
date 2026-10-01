@@ -43,7 +43,7 @@ const studies: AnimationStudy[] = [
 
 const uiStudies: UiStudyDefinition[] = [
   { id: 'training-ui', label: 'Training overview', width: 1280, height: 824, render: () => <TrainingDashboard /> },
-  { id: 'inference-ui', label: 'Inference', width: 1280, height: 816, render: () => <InferenceDashboard /> },
+  { id: 'inference-ui', label: 'Inference', width: 1280, height: 768, render: () => <InferenceDashboard /> },
   { id: 'cluster-ui', label: 'Cluster overview', width: 1280, height: 796, render: () => <ClusterDashboard /> },
 ];
 

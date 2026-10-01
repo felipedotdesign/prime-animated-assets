@@ -1,23 +1,25 @@
 import providerUrl from '../assets/ui/inference-provider.svg?url';
+import grokUrl from '../assets/ui/inference-grok.svg?url';
+import openaiUrl from '../assets/ui/inference-openai.svg?url';
 import UiSidebar from './UiSidebar';
 import './UiScreens.css';
 
 const models = [
-  { name: 'GLM 5.3', slug: 'z-ai/glm-5.3', type: 'Hosted', input: '$1.40', output: '$4.40', selected: true, logo: true },
-  { name: 'Qwen3.5-122B-A10B', slug: 'Qwen/Qwen3.5-122B-A10B', type: 'Hosted', input: '$0.30', output: '$0.90', logo: true },
-  { name: 'Qwen3.5-0.8B', slug: 'Qwen/Qwen3.5-0.8B', type: 'Hosted', input: '$0.04', output: '$0.08', logo: true },
-  { name: 'Qwen3.5-2B', slug: 'Qwen/Qwen3.5-2B', type: 'Hosted', input: '$0.06', output: '$0.18', logo: true },
-  { name: 'Qwen3.5-4B', slug: 'Qwen/Qwen3.5-4B', type: 'Hosted', input: '$0.10', output: '$0.30', logo: true },
-  { name: 'Qwen3.5-9B', slug: 'Qwen/Qwen3.5-9B', type: 'Hosted', input: '$0.18', output: '$0.54', logo: true },
-  { name: 'Grok 4.7', slug: 'x-ai/grok-4.7', type: 'Gateway', input: '$1.60', output: '$4.80' },
-  { name: 'GPT-6 Luna', slug: 'openai/gpt-6-luna', type: 'Gateway', input: '$0.10', output: '$0.50' },
+  { name: 'GLM 5.3', slug: 'z-ai/glm-5.3', type: 'Hosted', input: '$1.40', output: '$4.40', selected: true, logo: providerUrl },
+  { name: 'Qwen3.5-122B-A10B', slug: 'Qwen/Qwen3.5-122B-A10B', type: 'Hosted', input: '$0.30', output: '$0.90', logo: providerUrl },
+  { name: 'Qwen3.5-0.8B', slug: 'Qwen/Qwen3.5-0.8B', type: 'Hosted', input: '$0.04', output: '$0.08', logo: providerUrl },
+  { name: 'Qwen3.5-2B', slug: 'Qwen/Qwen3.5-2B', type: 'Hosted', input: '$0.06', output: '$0.18', logo: providerUrl },
+  { name: 'Qwen3.5-4B', slug: 'Qwen/Qwen3.5-4B', type: 'Hosted', input: '$0.10', output: '$0.30', logo: providerUrl },
+  { name: 'Qwen3.5-9B', slug: 'Qwen/Qwen3.5-9B', type: 'Hosted', input: '$0.18', output: '$0.54', logo: providerUrl },
+  { name: 'Grok 4.7', slug: 'x-ai/grok-4.7', type: 'Gateway', input: '$1.60', output: '$4.80', logo: grokUrl },
+  { name: 'GPT-6 Luna', slug: 'openai/gpt-6-luna', type: 'Gateway', input: '$0.10', output: '$0.50', logo: openaiUrl },
 ];
 
 function ModelIdentity({ model, detail = false }) {
   return (
     <div className={`inference-model-identity${detail ? ' is-detail' : ''}`}>
       <span className="inference-provider-logo">
-        {model.logo ? <img src={providerUrl} alt="" /> : null}
+        {model.logo ? <img src={model.logo} alt="" /> : null}
       </span>
       <span className="inference-model-names">
         <strong>{model.name}</strong>
@@ -65,7 +67,7 @@ export default function InferenceDashboard() {
             <section className="inference-details__section">
               <h3>PRICING</h3>
               <div className="inference-detail-grid">
-                <div><span>Input</span><strong>$4.40 <small>/Mtok</small></strong></div>
+                <div><span>Input</span><strong>$1.40 <small>/Mtok</small></strong></div>
                 <div><span>Output</span><strong>$4.40 <small>/Mtok</small></strong></div>
               </div>
               <div className="inference-detail-stack"><span>Prices effective since</span><strong>Aug 20, 2026</strong></div>

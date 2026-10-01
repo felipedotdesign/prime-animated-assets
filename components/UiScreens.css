@@ -160,7 +160,7 @@
 .training-details__columns .training-detail-pair { gap: 7px; margin-bottom: 16px; }
 
 /* Inference */
-.inference-screen { display: flex; height: 816px; }
+.inference-screen { display: flex; height: 768px; }
 .inference-app { display: flex; width: 1240px; min-width: 0; flex-direction: column; }
 .inference-heading { height: 77px; padding: 17px 18px; border-bottom: 1px solid #282828; }
 .inference-heading h2 { font-size: 20px; font-weight: 500; line-height: 23px; }
@@ -172,7 +172,7 @@
 .inference-tabs .is-active::after { position: absolute; right: 0; bottom: -1px; left: 0; height: 2px; background: #f4f4f5; content: ''; }
 .inference-workspace { display: flex; min-height: 0; flex: 1; overflow: hidden; }
 .inference-browser { width: 800px; flex: 0 0 800px; overflow: hidden; background: #000; }
-.inference-search { display: flex; height: 54px; align-items: center; padding: 0 18px; color: rgba(255,255,255,.6); font-size: 14px; line-height: 20px; }
+.inference-search { display: flex; height: 54px; align-items: center; padding: 0 18px; color: rgba(255,255,255,.6); font-size: 14px; font-weight: 400; line-height: 20px; }
 .inference-table-head,
 .inference-model-row { display: grid; grid-template-columns: 360px 120px 140px 140px; }
 .inference-table-head {
@@ -214,7 +214,9 @@
   white-space: nowrap;
 }
 .inference-model-type.is-gateway { border-color: #282828; background: transparent; }
-.inference-model-price { padding-left: 20px; font-family: var(--font-geist-mono), monospace; font-size: 14px; line-height: 18px; }
+.inference-table-head span:nth-child(n+3),
+.inference-model-price { font-family: ui-monospace, "SFMono-Regular", "SF Mono", Menlo, Consolas, monospace; }
+.inference-model-price { padding-left: 20px; font-size: 14px; line-height: 18px; }
 .inference-model-row > .inference-model-price:last-child { padding-left: 32px; }
 .inference-details {
   min-width: 0;
@@ -293,8 +295,9 @@
 .cluster-workload:last-child { border-bottom: 0; }
 .cluster-workload__icon { display: grid; width: 30px; height: 30px; place-items: center; background: #141415; }
 .cluster-workload__icon img { width: 14px; height: 14px; }
-.cluster-workload p { display: flex; align-items: center; gap: 10px; font-size: 10px; line-height: 12px; }
-.cluster-workload p span { color: rgba(255,255,255,.6); font-family: var(--font-geist-mono), monospace; font-size: 7px; letter-spacing: .04em; }
+.cluster-workload p { display: flex; align-items: baseline; gap: 8px; font-size: 10px; line-height: 12px; }
+.cluster-workload p span { flex: none; color: rgba(255,255,255,.6); font-family: var(--font-geist-mono), monospace; font-size: 7px; letter-spacing: .04em; }
+.cluster-workload p b { min-width: 0; font-weight: inherit; }
 .cluster-workload small { display: block; margin-top: 5px; color: rgba(255,255,255,.3); font-size: 8px; }
 .cluster-serving { display: flex; flex-direction: column; gap: 12px; padding: 4px 8px 8px; }
 .cluster-metrics { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }

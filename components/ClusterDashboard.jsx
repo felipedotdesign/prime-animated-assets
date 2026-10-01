@@ -42,7 +42,7 @@ export default function ClusterDashboard() {
           {workloads.map(([type, title, meta]) => (
             <div className="cluster-workload" key={title}>
               <div className="cluster-workload__icon"><img src={zapUrl} alt="" /></div>
-              <div><p><span>{type}</span>{title}</p><small>{meta}</small></div>
+              <div><p><span>{type}</span><b>{title}</b></p><small>{meta}</small></div>
             </div>
           ))}
         </div>
