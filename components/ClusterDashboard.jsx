@@ -1,6 +1,7 @@
 import zapUrl from '../assets/ui/cluster-zap.svg?url';
 import chartGreenUrl from '../assets/ui/cluster-reward-curve.svg?url';
 import chartPurpleUrl from '../assets/ui/cluster-reward-curve1.svg?url';
+import { MOTION_TIMING } from './motionTiming';
 import './UiScreens.css';
 
 const workloads = [
@@ -18,7 +19,13 @@ const metrics = [
 
 export default function ClusterDashboard() {
   return (
-    <div className="ui-screen cluster-screen">
+    <div
+      className="ui-screen cluster-screen"
+      style={{
+        '--ui-line-delay': `${MOTION_TIMING.ui.lineDelay}ms`,
+        '--ui-line-duration': `${MOTION_TIMING.ui.lineDuration}ms`,
+      }}
+    >
       <section className="cluster-capacity">
         <div className="cluster-actions">
           {['Start Training','Deploy Slurm','Deploy Inference','Kubernetes Access'].map(action => <button key={action} type="button">{action}</button>)}

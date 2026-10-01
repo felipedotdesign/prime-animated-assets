@@ -33,7 +33,7 @@
 .ui-line-reveal--base { opacity: .24; }
 .ui-line-reveal--active {
   clip-path: inset(0 100% 0 0);
-  animation: ui-line-reveal 1340ms linear 160ms forwards;
+  animation: ui-line-reveal var(--ui-line-duration, 1340ms) linear var(--ui-line-delay, 160ms) forwards;
 }
 
 @keyframes ui-line-reveal {
@@ -109,7 +109,9 @@
 .training-progress__ticks { display: flex; height: 14px; gap: 2px; margin-top: 10px; overflow: hidden; }
 .training-progress__ticks i { display: block; width: 1px; height: 14px; flex: 0 0 1px; background: #323232; }
 .training-progress__ticks i.is-complete { background: #b2c9ef; }
-.training-progress__ticks i.is-next { animation: training-progress-next 1600ms ease-in-out infinite; }
+.training-progress__ticks i.is-next {
+  animation: training-progress-next var(--training-next-pulse-duration, 1600ms) ease-in-out infinite;
+}
 @keyframes training-progress-next {
   0%, 100% { background: #323232; }
   50% { background: rgba(178,201,239,.72); }
@@ -215,7 +217,7 @@
   background: #c5e1c1;
   transform: scaleX(0);
   transform-origin: left center;
-  animation: cluster-progress-fill 1340ms linear 160ms forwards;
+  animation: cluster-progress-fill var(--ui-line-duration, 1340ms) linear var(--ui-line-delay, 160ms) forwards;
 }
 @keyframes cluster-progress-fill {
   to { transform: scaleX(var(--cluster-progress, 1)); }

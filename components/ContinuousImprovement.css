@@ -24,85 +24,43 @@
 }
 
 .continuous-improvement__orbit,
-.continuous-improvement__ring,
-.continuous-improvement__orbit-static {
+.continuous-improvement__orbits,
+.continuous-improvement__ring {
   display: block;
   max-width: none;
   pointer-events: none;
 }
 
-.continuous-improvement__orbit--vertical {
+.continuous-improvement__orbits {
   position: absolute;
   top: 55px;
-  left: 125px;
-  width: 112px;
-  height: 220px;
-}
-
-.continuous-improvement__orbit-horizontal {
-  position: absolute;
-  top: 125px;
   left: 71px;
-  display: flex;
   width: 220px;
-  height: 80px;
-  align-items: center;
-  justify-content: center;
-}
-
-.continuous-improvement__orbit-static {
-  position: absolute;
-  opacity: 0;
-}
-
-.continuous-improvement__orbit--vertical
-  .continuous-improvement__orbit-static {
-  inset: 0;
-  width: 112px;
   height: 220px;
+  transform-style: preserve-3d;
+  animation: continuous-improvement-orbits-rotate
+    var(--continuous-rotation-duration, 3000ms) linear both;
+  will-change: transform;
 }
 
-.continuous-improvement__orbit-horizontal
-  .continuous-improvement__orbit-static {
-  top: -70px;
-  left: 70px;
-  width: 80px;
-  height: 220px;
-  transform: rotate(-90deg);
-}
-
-.continuous-improvement__orbit-motion {
+.continuous-improvement__orbit {
   position: absolute;
   inset: 0;
-  display: block;
-  width: 100%;
-  height: 100%;
-  overflow: visible;
-  pointer-events: none;
+  width: 220px;
+  height: 220px;
+  border: 1.5px solid #444;
+  border-radius: 50%;
+  backface-visibility: visible;
+  transform-origin: center;
+  transform-style: preserve-3d;
 }
 
-.continuous-improvement__orbit-path {
-  fill: none;
-  stroke: rgb(255 255 255 / 20%);
-  stroke-width: 1.5;
-  stroke-dasharray: 3 3;
+.continuous-improvement__orbit--vertical {
+  transform: rotateY(59.4deg);
 }
 
-.continuous-improvement__orbit-reveal {
-  fill: none;
-  stroke: #fff;
-  stroke-width: 4;
-  stroke-dasharray: 1;
-  stroke-dashoffset: 1;
-  animation: continuous-improvement-orbit-reveal
-    var(--continuous-orbit-duration, 900ms) linear both;
-  will-change: stroke-dashoffset;
-}
-
-@keyframes continuous-improvement-orbit-reveal {
-  to {
-    stroke-dashoffset: 0;
-  }
+.continuous-improvement__orbit--horizontal {
+  transform: rotateX(68.7deg);
 }
 
 .continuous-improvement__ring {
@@ -114,6 +72,16 @@
   border: 1px solid #fff;
   border-radius: 50%;
   z-index: 0;
+}
+
+@keyframes continuous-improvement-orbits-rotate {
+  from {
+    transform: rotate3d(0.35, 0.9, 0.25, -180deg);
+  }
+
+  to {
+    transform: rotate3d(0.35, 0.9, 0.25, 0deg);
+  }
 }
 
 .continuous-improvement__label {
@@ -134,11 +102,9 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .continuous-improvement__orbit-static {
-    opacity: 1;
-  }
-
-  .continuous-improvement__orbit-motion {
-    display: none;
+  .continuous-improvement__orbits {
+    transform: none;
+    animation: none;
+    will-change: auto;
   }
 }

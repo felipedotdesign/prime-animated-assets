@@ -1,0 +1,131 @@
+.on-demand-diagram,
+.on-demand-diagram * {
+  box-sizing: border-box;
+}
+
+.on-demand-diagram {
+  position: relative;
+  width: 560px;
+  height: 330px;
+  margin: 0;
+  overflow: hidden;
+  background: #000;
+  color: #fff;
+  font-family: var(--font-geist-mono), ui-monospace, "SFMono-Regular", "SF Mono", Menlo, Consolas, monospace;
+  font-size: 12px;
+  line-height: normal;
+  text-transform: uppercase;
+}
+
+.on-demand-diagram__heading,
+.on-demand-diagram__value {
+  position: absolute;
+  top: 109px;
+  display: block;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.on-demand-diagram__heading { left: 103px; }
+.on-demand-diagram__value { right: 108.05px; }
+
+.on-demand-diagram__track {
+  position: absolute;
+  top: 144.46px;
+  left: 103px;
+  width: 354px;
+  height: 1px;
+  background: #2c2d2e;
+}
+
+.on-demand-diagram__progress {
+  position: absolute;
+  inset: 0 auto 0 0;
+  display: block;
+  width: 177px;
+  background: #fff;
+  transform: scaleX(0);
+  transform-origin: left center;
+  animation: on-demand-progress var(--on-demand-duration, 800ms) linear var(--on-demand-delay, 120ms) both;
+  will-change: transform;
+}
+
+.on-demand-diagram__handle {
+  position: absolute;
+  top: -2.66px;
+  left: -2.66px;
+  display: block;
+  width: 5.31px;
+  height: 5.31px;
+  background: #fff;
+  transform: translateX(0);
+  animation: on-demand-handle var(--on-demand-duration, 800ms) linear var(--on-demand-delay, 120ms) both;
+  will-change: transform;
+}
+
+.on-demand-diagram__options {
+  position: absolute;
+  top: 165.82px;
+  left: 103px;
+  display: grid;
+  width: 354px;
+  height: 56px;
+  grid-template-columns: repeat(3, 118px);
+}
+
+.on-demand-diagram__option {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 9.05px;
+  border: .5px solid #2c2d2e;
+  background: #000;
+}
+
+.on-demand-diagram__option + .on-demand-diagram__option {
+  border-left: 0;
+}
+
+.on-demand-diagram__option h3,
+.on-demand-diagram__option p {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.on-demand-diagram__option h3 {
+  color: #fff;
+  line-height: normal;
+}
+
+.on-demand-diagram__option p {
+  color: rgba(255, 255, 255, .24);
+  line-height: 1;
+}
+
+@keyframes on-demand-progress {
+  to { transform: scaleX(1); }
+}
+
+@keyframes on-demand-handle {
+  to { transform: translateX(177px); }
+}
+
+@media (max-width: 780px) {
+  .on-demand-diagram { transform: scale(.62); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .on-demand-diagram__progress {
+    transform: scaleX(1);
+    animation: none;
+    will-change: auto;
+  }
+
+  .on-demand-diagram__handle {
+    transform: translateX(177px);
+    animation: none;
+    will-change: auto;
+  }
+}

@@ -1,0 +1,116 @@
+.liquid-diagram,
+.liquid-diagram * {
+  box-sizing: border-box;
+}
+
+.liquid-diagram {
+  position: relative;
+  width: 560px;
+  height: 330px;
+  margin: 0;
+  overflow: hidden;
+  background: #000;
+  color: #fff;
+  font-family: var(--font-geist-mono), ui-monospace, "SFMono-Regular", "SF Mono", Menlo, Consolas, monospace;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: normal;
+  text-transform: uppercase;
+}
+
+.liquid-diagram__heading,
+.liquid-diagram__value,
+.liquid-diagram figcaption {
+  position: absolute;
+  display: block;
+  margin: 0;
+  white-space: nowrap;
+}
+
+.liquid-diagram__heading {
+  top: 109px;
+  left: 88px;
+}
+
+.liquid-diagram__value {
+  top: 109px;
+  right: 89px;
+}
+
+.liquid-diagram__blocks {
+  position: absolute;
+  top: 140.32px;
+  left: 88px;
+  display: flex;
+  gap: 2px;
+  width: 383px;
+  height: 51px;
+}
+
+.liquid-diagram__block {
+  display: block;
+  width: 25.5px;
+  height: 51px;
+  flex: 0 0 25.5px;
+  border: .5px solid #2c2d2e;
+  background: transparent;
+  transition:
+    border-color var(--liquid-fill-duration, 160ms) linear,
+    background-color var(--liquid-fill-duration, 160ms) linear;
+}
+
+.liquid-diagram__block.is-filled {
+  border-color: #54565a;
+  background: #54565a;
+}
+
+.liquid-diagram__bracket {
+  position: absolute;
+  top: 191.32px;
+  width: 124.49px;
+  height: 23.29px;
+  border-bottom: .5px solid #2c2d2e;
+}
+
+.liquid-diagram__bracket::before {
+  position: absolute;
+  top: 0;
+  width: .5px;
+  height: 23.29px;
+  background: #2c2d2e;
+  content: '';
+}
+
+.liquid-diagram__bracket--left {
+  left: 88px;
+}
+
+.liquid-diagram__bracket--left::before {
+  left: 0;
+}
+
+.liquid-diagram__bracket--right {
+  right: 89px;
+}
+
+.liquid-diagram__bracket--right::before {
+  right: 0;
+}
+
+.liquid-diagram figcaption {
+  top: 207.61px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+@media (max-width: 780px) {
+  .liquid-diagram { transform: scale(.62); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .liquid-diagram__block.is-filled {
+    border-color: #54565a;
+    background: #54565a;
+    transition: none;
+  }
+}

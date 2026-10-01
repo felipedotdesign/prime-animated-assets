@@ -4,11 +4,10 @@ import { useEffect, useState } from 'react';
 import chevronDownUrl from '../assets/ui/inference-chevron-down-medium.svg?url';
 import chevronTopUrl from '../assets/ui/inference-chevron-top-medium.svg?url';
 import UiSidebar from './UiSidebar';
+import { MOTION_TIMING } from './motionTiming';
 import './UiScreens.css';
 
-const BACKGROUND_UPDATE_INTERVAL = 4000;
 const MAX_BACKGROUND_UPDATES = 30;
-const SUCCESS_RATE_INTERVAL = 8000;
 const INITIAL_SUCCESS_RATE = 88;
 const MAX_SUCCESS_RATE = 99;
 const SUCCESS_RATE_STEP = 0.5;
@@ -47,7 +46,7 @@ export default function InferenceDashboard() {
         if (nextValue === MAX_BACKGROUND_UPDATES) window.clearInterval(interval);
         return nextValue;
       });
-    }, BACKGROUND_UPDATE_INTERVAL);
+    }, MOTION_TIMING.inferenceUi.requestInterval);
 
     return () => window.clearInterval(interval);
   }, []);
@@ -61,7 +60,7 @@ export default function InferenceDashboard() {
         if (nextValue === MAX_SUCCESS_RATE) window.clearInterval(interval);
         return nextValue;
       });
-    }, SUCCESS_RATE_INTERVAL);
+    }, MOTION_TIMING.inferenceUi.successRateInterval);
 
     return () => window.clearInterval(interval);
   }, []);

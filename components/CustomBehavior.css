@@ -37,7 +37,26 @@
     rgb(255 255 255 / 6%) 0 1px,
     transparent 1px 8px
   );
+  opacity: 0;
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    #000 0 50%,
+    transparent 55% 100%
+  );
+  -webkit-mask-position: 100% 0;
+  -webkit-mask-size: 220% 100%;
+  mask-image: linear-gradient(
+    90deg,
+    #000 0 50%,
+    transparent 55% 100%
+  );
+  mask-position: 100% 0;
+  mask-size: 220% 100%;
   pointer-events: none;
+  animation: custom-behavior-diagonals-fade
+    var(--custom-behavior-duration, 400ms) linear
+    var(--custom-behavior-delay, 120ms) both;
+  will-change: opacity, mask-position;
 }
 
 .custom-behavior__boundary svg {
@@ -53,7 +72,7 @@
   stroke-dasharray: var(--custom-behavior-path-length);
   stroke-dashoffset: var(--custom-behavior-path-length);
   vector-effect: non-scaling-stroke;
-  animation: custom-behavior-boundary-draw
+  animation: custom-behavior-boundary-draw-dark
     var(--custom-behavior-duration, 220ms) linear
     var(--custom-behavior-delay, 120ms) both;
   will-change: stroke-dashoffset;
@@ -148,17 +167,40 @@
   white-space: nowrap;
 }
 
-@keyframes custom-behavior-boundary-draw {
+@keyframes custom-behavior-boundary-draw-dark {
   from {
+    stroke: #191a1a;
     stroke-dashoffset: var(--custom-behavior-path-length);
   }
 
   to {
+    stroke: #191a1a;
     stroke-dashoffset: 0;
   }
 }
 
+@keyframes custom-behavior-diagonals-fade {
+  from {
+    opacity: 0;
+    -webkit-mask-position: 100% 0;
+    mask-position: 100% 0;
+  }
+
+  to {
+    opacity: 1;
+    -webkit-mask-position: 0 0;
+    mask-position: 0 0;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
+  .custom-behavior__diagonals {
+    opacity: 1;
+    -webkit-mask-position: 0 0;
+    mask-position: 0 0;
+    animation: none;
+  }
+
   .custom-behavior__boundary-path {
     stroke-dashoffset: 0;
     animation: none;

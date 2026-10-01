@@ -13,6 +13,8 @@ import EnvironmentsGrid from '../components/EnvironmentsGrid';
 import ContinuousImprovement from '../components/ContinuousImprovement';
 import DockerDiagram from '../components/DockerDiagram';
 import LoopDiagram from '../components/LoopDiagram';
+import LiquidDiagram from '../components/LiquidDiagram';
+import OnDemandDiagram from '../components/OnDemandDiagram';
 import TrainingDashboard from '../components/TrainingDashboard';
 import InferenceDashboard from '../components/InferenceDashboard';
 import ClusterDashboard from '../components/ClusterDashboard';
@@ -35,6 +37,8 @@ const studies: AnimationStudy[] = [
   { id: 'continuous-improvement', label: 'Continuous improvement', render: () => <ContinuousImprovement /> },
   { id: 'docker', label: 'Docker', render: () => <DockerDiagram /> },
   { id: 'loop', label: 'Loop', span: 2, render: () => <LoopDiagram /> },
+  { id: 'liquid', label: 'Liquid', span: 2, render: (complete) => <LiquidDiagram complete={complete} /> },
+  { id: 'on-demand', label: 'On-demand', span: 2, render: (complete) => <OnDemandDiagram complete={complete} /> },
 ];
 
 const uiStudies: UiStudyDefinition[] = [

@@ -17,7 +17,7 @@ export default function LineChart({
   animationDuration = MOTION_TIMING.rewardCurve.duration,
   animationDelay = MOTION_TIMING.rewardCurve.delay,
   valueCountDelay = MOTION_TIMING.rewardCurve.delay,
-  valueCountDuration = MOTION_TIMING.rewardCurve.duration,
+  valueCountDuration = MOTION_TIMING.rewardCurve.valueDuration,
   complete = false,
 }) {
   const titleId = useId();

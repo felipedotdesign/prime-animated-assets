@@ -2,10 +2,11 @@ export const MOTION_STEP = 20;
 
 const step = (count) => count * MOTION_STEP;
 
-export const MOTION_TIMING = Object.freeze({
+const motionTiming = {
   rewardCurve: {
     delay: step(8),
     duration: step(67),
+    valueDuration: step(68),
   },
   evaluationTable: {
     delay: step(14),
@@ -43,7 +44,7 @@ export const MOTION_TIMING = Object.freeze({
     textGap: step(2),
   },
   continuousImprovement: {
-    dashDuration: step(35),
+    rotationDuration: step(75),
   },
   docker: {
     flowDelay: step(6),
@@ -56,4 +57,35 @@ export const MOTION_TIMING = Object.freeze({
     checkpointDuration: step(8),
     checkpointStagger: step(5),
   },
-});
+  liquid: {
+    fillDuration: step(8),
+    initialDelay: step(50),
+    fillInterval: step(50),
+  },
+  onDemand: {
+    delay: step(6),
+    duration: step(30),
+  },
+  ui: {
+    lineDelay: step(8),
+    lineDuration: step(67),
+    nextTickPulseDuration: step(80),
+  },
+  trainingUi: {
+    backgroundTickInterval: step(200),
+  },
+  inferenceUi: {
+    requestInterval: step(200),
+    successRateInterval: step(400),
+  },
+};
+
+for (const [groupName, group] of Object.entries(motionTiming)) {
+  for (const [timingName, value] of Object.entries(group)) {
+    if (!Number.isInteger(value / MOTION_STEP)) {
+      throw new Error(`${groupName}.${timingName} must align to the ${MOTION_STEP}ms motion step`);
+    }
+  }
+}
+
+export const MOTION_TIMING = Object.freeze(motionTiming);

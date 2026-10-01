@@ -5,6 +5,7 @@ import rewardSeriesUrl from '../assets/ui/training-primary-series.svg?url';
 import metricsSeriesUrl from '../assets/ui/training-vector.svg?url';
 import distributionSeriesUrl from '../assets/ui/training-reward-curve.svg?url';
 import UiSidebar from './UiSidebar';
+import { MOTION_TIMING } from './motionTiming';
 import './UiScreens.css';
 
 const TOTAL_SUMMARY_TICKS = 250;
@@ -12,7 +13,6 @@ const INITIAL_COMPLETE_TICKS = 110;
 const INITIAL_STEPS = 44;
 const TOTAL_STEPS = 100;
 const INITIAL_PERCENTAGE = 44;
-const BACKGROUND_TICK_INTERVAL = 4000;
 const summaryTicks = Array.from({ length: TOTAL_SUMMARY_TICKS });
 
 function LinePanel({ title, series, variant }) {
@@ -54,13 +54,20 @@ export default function TrainingDashboard() {
         if (nextValue === TOTAL_SUMMARY_TICKS) window.clearInterval(interval);
         return nextValue;
       });
-    }, BACKGROUND_TICK_INTERVAL);
+    }, MOTION_TIMING.trainingUi.backgroundTickInterval);
 
     return () => window.clearInterval(interval);
   }, []);
 
   return (
-    <div className="ui-screen training-screen">
+    <div
+      className="ui-screen training-screen"
+      style={{
+        '--ui-line-delay': `${MOTION_TIMING.ui.lineDelay}ms`,
+        '--ui-line-duration': `${MOTION_TIMING.ui.lineDuration}ms`,
+        '--training-next-pulse-duration': `${MOTION_TIMING.ui.nextTickPulseDuration}ms`,
+      }}
+    >
       <UiSidebar />
       <div className="training-app">
         <nav className="training-topbar">
