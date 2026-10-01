@@ -43,7 +43,17 @@ export const MOTION_TIMING = Object.freeze({
     textGap: step(2),
   },
   continuousImprovement: {
-    dashDuration: step(45),
-    dotDuration: step(450),
+    dashDuration: step(35),
+  },
+  docker: {
+    flowDelay: step(6),
+    flowDuration: step(30),
+    activationDuration: step(10),
+  },
+  loop: {
+    delay: step(6),
+    duration: step(40),
+    checkpointDuration: step(8),
+    checkpointStagger: step(5),
   },
 });

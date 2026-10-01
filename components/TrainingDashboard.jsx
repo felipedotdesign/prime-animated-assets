@@ -1,10 +1,19 @@
+'use client';
+
+import { useEffect, useState } from 'react';
 import rewardSeriesUrl from '../assets/ui/training-primary-series.svg?url';
 import metricsSeriesUrl from '../assets/ui/training-vector.svg?url';
 import distributionSeriesUrl from '../assets/ui/training-reward-curve.svg?url';
 import UiSidebar from './UiSidebar';
 import './UiScreens.css';
 
-const summaryTicks = Array.from({ length: 250 });
+const TOTAL_SUMMARY_TICKS = 250;
+const INITIAL_COMPLETE_TICKS = 110;
+const INITIAL_STEPS = 44;
+const TOTAL_STEPS = 100;
+const INITIAL_PERCENTAGE = 44;
+const BACKGROUND_TICK_INTERVAL = 4000;
+const summaryTicks = Array.from({ length: TOTAL_SUMMARY_TICKS });
 
 function LinePanel({ title, series, variant }) {
   return (
@@ -14,7 +23,8 @@ function LinePanel({ title, series, variant }) {
         <span className="training-grid training-grid--a" />
         <span className="training-grid training-grid--b" />
         <span className="training-grid training-grid--c" />
-        <img className="training-line-panel__series" src={series} alt="" />
+        <img className="training-line-panel__series ui-line-reveal--base" src={series} alt="" />
+        <img className="training-line-panel__series ui-line-reveal--active" src={series} alt="" />
       </div>
       <div className="training-axis"><span>0</span><span>25</span><span>50</span><span>75</span><span>100</span></div>
     </section>
@@ -26,6 +36,29 @@ function DetailPair({ label, value }) {
 }
 
 export default function TrainingDashboard() {
+  const [completeTicks, setCompleteTicks] = useState(INITIAL_COMPLETE_TICKS);
+  const progress = (completeTicks - INITIAL_COMPLETE_TICKS) / (TOTAL_SUMMARY_TICKS - INITIAL_COMPLETE_TICKS);
+  const currentSteps = Math.min(TOTAL_STEPS, INITIAL_STEPS + Math.round(progress * (TOTAL_STEPS - INITIAL_STEPS)));
+  const currentPercentage = INITIAL_PERCENTAGE + progress * (100 - INITIAL_PERCENTAGE);
+
+  useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return undefined;
+
+    const interval = window.setInterval(() => {
+      setCompleteTicks((value) => {
+        if (value >= TOTAL_SUMMARY_TICKS) {
+          window.clearInterval(interval);
+          return value;
+        }
+        const nextValue = value + 1;
+        if (nextValue === TOTAL_SUMMARY_TICKS) window.clearInterval(interval);
+        return nextValue;
+      });
+    }, BACKGROUND_TICK_INTERVAL);
+
+    return () => window.clearInterval(interval);
+  }, []);
+
   return (
     <div className="ui-screen training-screen">
       <UiSidebar />
@@ -39,10 +72,15 @@ export default function TrainingDashboard() {
         <div className="training-body">
           <main className="training-main">
             <section className="training-progress">
-              <div className="training-progress__value">88.46<span>%</span></div>
-              <div className="training-progress__caption">88 / 100 STEPS</div>
+              <div className="training-progress__value">{currentPercentage.toFixed(2)}<span>%</span></div>
+              <div className="training-progress__caption">{currentSteps} / 100 STEPS</div>
               <div className="training-progress__ticks">
-                {summaryTicks.map((_, index) => <i key={index} className={index < 221 ? 'is-complete' : ''} />)}
+                {summaryTicks.map((_, index) => (
+                  <i
+                    key={index}
+                    className={index < completeTicks ? 'is-complete' : index === completeTicks ? 'is-next' : ''}
+                  />
+                ))}
               </div>
             </section>
             <div className="training-charts">
@@ -53,7 +91,8 @@ export default function TrainingDashboard() {
               <h3>Reward Distribution</h3>
               <div className="training-distribution__plot">
                 <span /><span />
-                <img src={distributionSeriesUrl} alt="" />
+                <img className="ui-line-reveal--base" src={distributionSeriesUrl} alt="" />
+                <img className="ui-line-reveal--active" src={distributionSeriesUrl} alt="" />
               </div>
               <div className="training-distribution__labels">
                 {['0.050–0.100','0.150–0.200','0.250–0.300','0.350–0.400','0.450–0.500','0.550–0.600','0.650–0.700','0.750–0.800','0.850–0.900','0.950–1.000'].map(label => <span key={label}>{label}</span>)}

@@ -30,6 +30,16 @@
 .ui-screen h3,
 .ui-screen p { margin: 0; }
 
+.ui-line-reveal--base { opacity: .24; }
+.ui-line-reveal--active {
+  clip-path: inset(0 100% 0 0);
+  animation: ui-line-reveal 1340ms linear 160ms forwards;
+}
+
+@keyframes ui-line-reveal {
+  to { clip-path: inset(0 0 0 0); }
+}
+
 .ui-sidebar {
   position: relative;
   display: flex;
@@ -43,7 +53,9 @@
 }
 
 .ui-sidebar__mark,
-.ui-sidebar__item {
+.ui-sidebar__item,
+.ui-sidebar__divider,
+.ui-sidebar__spacer {
   position: relative;
   display: grid;
   width: 40px;
@@ -53,23 +65,23 @@
 }
 
 .ui-sidebar__mark img { width: 12.25px; height: 12.25px; }
-.ui-sidebar__item img { position: relative; z-index: 1; width: 14px; height: 14px; }
+.ui-sidebar__item img {
+  position: relative;
+  z-index: 1;
+  width: auto;
+  height: auto;
+  max-width: 14px;
+  max-height: 14px;
+}
+.ui-sidebar__divider img { width: 40px; height: 40px; }
 .ui-sidebar__item.is-selected::before {
   position: absolute;
   width: 32px;
   height: 32px;
   border-radius: 2px;
-  background: rgba(255,255,255,.1);
+  background: rgba(255,255,255,.12);
   content: '';
 }
-.ui-sidebar__separator {
-  width: 16px;
-  height: 1px;
-  flex: 0 0 1px;
-  margin: 19px 0 0;
-  background: #252525;
-}
-.ui-sidebar__separator--lower { position: absolute; top: 280px; margin: 0; }
 
 /* Training */
 .training-screen { display: flex; height: 824px; }
@@ -97,6 +109,11 @@
 .training-progress__ticks { display: flex; height: 14px; gap: 2px; margin-top: 10px; overflow: hidden; }
 .training-progress__ticks i { display: block; width: 1px; height: 14px; flex: 0 0 1px; background: #323232; }
 .training-progress__ticks i.is-complete { background: #b2c9ef; }
+.training-progress__ticks i.is-next { animation: training-progress-next 1600ms ease-in-out infinite; }
+@keyframes training-progress-next {
+  0%, 100% { background: #323232; }
+  50% { background: rgba(178,201,239,.72); }
+}
 .training-charts { display: grid; height: 247px; grid-template-columns: 1fr 1fr; border-bottom: 1px solid #191919; }
 .training-line-panel { position: relative; overflow: hidden; padding: 12px; }
 .training-line-panel + .training-line-panel { border-left: 1px solid #191919; }
@@ -176,10 +193,33 @@
 .cluster-stats { display: grid; height: 89px; grid-template-columns: repeat(3, 1fr); }
 .cluster-stats > div { position: relative; display: flex; flex-direction: column; gap: 7px; padding: 12px; border: 1px solid #252525; }
 .cluster-stats > div + div { border-left: 0; }
+.cluster-stats > div:nth-child(-n+2)::after {
+  position: absolute;
+  right: 11px;
+  bottom: 11px;
+  left: 11px;
+  height: 4px;
+  background: rgba(255,255,255,.1);
+  content: '';
+}
 .cluster-stats span { color: rgba(255,255,255,.6); font-size: 12px; }
 .cluster-stats strong { font-family: Arial, sans-serif; font-size: 20px; font-weight: 400; }
 .cluster-stats strong i { color: rgba(255,255,255,.4); font-style: normal; }
-.cluster-stats b { position: absolute; right: 11px; bottom: 11px; left: 11px; height: 4px; background: #c5e1c1; }
+.cluster-stats b {
+  position: absolute;
+  right: 11px;
+  bottom: 11px;
+  left: 11px;
+  height: 4px;
+  z-index: 1;
+  background: #c5e1c1;
+  transform: scaleX(0);
+  transform-origin: left center;
+  animation: cluster-progress-fill 1340ms linear 160ms forwards;
+}
+@keyframes cluster-progress-fill {
+  to { transform: scaleX(var(--cluster-progress, 1)); }
+}
 .cluster-workloads { display: flex; flex-direction: column; gap: 12px; padding: 8px; }
 .cluster-workloads h3,
 .cluster-serving h3 { padding: 0 8px; font-size: 10px; font-weight: 400; }
@@ -200,3 +240,15 @@
 .cluster-charts { display: grid; height: 225px; grid-template-columns: 1fr 1fr; gap: 12px; }
 .cluster-charts > div { position: relative; overflow: hidden; border: 1px solid #252525; }
 .cluster-charts img { position: absolute; right: 0; bottom: 0; left: 0; width: 100%; height: 205px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .ui-line-reveal--active {
+    clip-path: none;
+    animation: none;
+  }
+  .cluster-stats b {
+    transform: scaleX(var(--cluster-progress, 1));
+    animation: none;
+  }
+  .training-progress__ticks i.is-next { animation: none; }
+}

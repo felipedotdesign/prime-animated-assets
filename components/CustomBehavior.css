@@ -26,6 +26,20 @@
   height: 109px;
 }
 
+.custom-behavior__diagonals {
+  position: absolute;
+  top: 90px;
+  left: 56px;
+  width: 244px;
+  height: 109px;
+  background: repeating-linear-gradient(
+    135deg,
+    rgb(255 255 255 / 6%) 0 1px,
+    transparent 1px 8px
+  );
+  pointer-events: none;
+}
+
 .custom-behavior__boundary svg {
   display: block;
   width: 100%;
@@ -64,7 +78,7 @@
   justify-content: center;
   color: #fff;
   background-color: #000;
-  border: 1px solid rgb(255 255 255 / 16%);
+  border: 1px solid #191a1a;
   font-weight: 400;
   line-height: 1;
   white-space: nowrap;
@@ -76,8 +90,8 @@
   position: absolute;
   inset: 1px;
   display: block;
-  background: #fff;
-  opacity: 1;
+  background: transparent;
+  opacity: 0;
   transform: none;
   animation: none;
 }
@@ -88,7 +102,7 @@
   display: block;
   width: 100%;
   color: #fff;
-  mix-blend-mode: difference;
+  mix-blend-mode: normal;
   text-align: center;
 }
 

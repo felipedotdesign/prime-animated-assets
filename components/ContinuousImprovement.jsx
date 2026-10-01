@@ -8,7 +8,6 @@ export default function ContinuousImprovement({
   firstLine = "Continuos",
   secondLine = "Improvement",
   orbitDuration = MOTION_TIMING.continuousImprovement.dashDuration,
-  dotDuration = MOTION_TIMING.continuousImprovement.dotDuration,
 }) {
   const classes = ["continuous-improvement", className]
     .filter(Boolean)
@@ -42,12 +41,29 @@ export default function ContinuousImprovement({
             viewBox="0 0 112 220"
             preserveAspectRatio="none"
           >
+            <defs>
+              <mask
+                id="continuous-improvement-vertical-reveal"
+                maskUnits="userSpaceOnUse"
+                x="0"
+                y="0"
+                width="112"
+                height="220"
+              >
+                <path
+                  className="continuous-improvement__orbit-reveal"
+                  d="M56 219.5A55.5 109.5 0 1 1 56 .5A55.5 109.5 0 1 1 56 219.5"
+                  pathLength="1"
+                />
+              </mask>
+            </defs>
             <ellipse
-              className="continuous-improvement__orbit-path continuous-improvement__orbit-path--reverse"
+              className="continuous-improvement__orbit-path"
               cx="56"
               cy="110"
               rx="55.5"
               ry="109.5"
+              mask="url(#continuous-improvement-vertical-reveal)"
             />
           </svg>
         </span>
@@ -69,12 +85,29 @@ export default function ContinuousImprovement({
             viewBox="0 0 220 80"
             preserveAspectRatio="none"
           >
+            <defs>
+              <mask
+                id="continuous-improvement-horizontal-reveal"
+                maskUnits="userSpaceOnUse"
+                x="0"
+                y="0"
+                width="220"
+                height="80"
+              >
+                <path
+                  className="continuous-improvement__orbit-reveal"
+                  d="M219.5 40A109.5 39.5 0 1 1 .5 40A109.5 39.5 0 1 1 219.5 40"
+                  pathLength="1"
+                />
+              </mask>
+            </defs>
             <ellipse
               className="continuous-improvement__orbit-path"
               cx="110"
               cy="40"
               rx="109.5"
               ry="39.5"
+              mask="url(#continuous-improvement-horizontal-reveal)"
             />
           </svg>
         </span>
@@ -84,27 +117,6 @@ export default function ContinuousImprovement({
           aria-hidden="true"
           data-node-id="2466:8906"
         />
-
-        <svg
-          className="continuous-improvement__dot-layer"
-          viewBox="0 0 356 330"
-          aria-hidden="true"
-        >
-          <circle className="continuous-improvement__orbit-dot" r="5">
-            <animateMotion
-              dur={`${dotDuration}ms`}
-              repeatCount="indefinite"
-              path="M 181 55.5 A 55.5 109.5 0 1 0 181 274.5 A 55.5 109.5 0 1 0 181 55.5"
-            />
-          </circle>
-          <circle className="continuous-improvement__orbit-dot" r="5">
-            <animateMotion
-              dur={`${dotDuration}ms`}
-              repeatCount="indefinite"
-              path="M 181 125.5 A 109.5 39.5 0 1 1 181 204.5 A 109.5 39.5 0 1 1 181 125.5"
-            />
-          </circle>
-        </svg>
       </div>
 
       <figcaption

@@ -86,6 +86,8 @@
   display: flex;
   min-height: 58px;
   align-items: center;
+  justify-content: space-between;
+  gap: 16px;
   padding: 0 16px;
   border-bottom: 1px solid #242424;
 }
@@ -106,6 +108,8 @@
   border-bottom: 1px solid #242424;
   background: #090909;
 }
+
+.animation-tile--wide { grid-column: span 2; }
 
 .animation-tile__header {
   display: flex;
@@ -172,6 +176,7 @@
 @media (max-width: 780px) {
   .motion-gallery { padding: 36px 16px 64px; }
   .motion-gallery__grid { grid-template-columns: 1fr; }
+  .animation-tile--wide { grid-column: span 1; }
   .animation-tile__stage { min-height: 360px; }
 }
 

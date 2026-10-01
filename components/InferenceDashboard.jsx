@@ -1,7 +1,17 @@
+'use client';
+
+import { useEffect, useState } from 'react';
 import chevronDownUrl from '../assets/ui/inference-chevron-down-medium.svg?url';
 import chevronTopUrl from '../assets/ui/inference-chevron-top-medium.svg?url';
 import UiSidebar from './UiSidebar';
 import './UiScreens.css';
+
+const BACKGROUND_UPDATE_INTERVAL = 4000;
+const MAX_BACKGROUND_UPDATES = 30;
+const SUCCESS_RATE_INTERVAL = 8000;
+const INITIAL_SUCCESS_RATE = 88;
+const MAX_SUCCESS_RATE = 99;
+const SUCCESS_RATE_STEP = 0.5;
 
 const adapters = [
   'All LoRA adapters',
@@ -25,6 +35,37 @@ function Metric({ label, value }) {
 }
 
 export default function InferenceDashboard() {
+  const [requests, setRequests] = useState(0);
+  const [successRate, setSuccessRate] = useState(INITIAL_SUCCESS_RATE);
+
+  useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return undefined;
+
+    const interval = window.setInterval(() => {
+      setRequests((value) => {
+        const nextValue = Math.min(value + 1, MAX_BACKGROUND_UPDATES);
+        if (nextValue === MAX_BACKGROUND_UPDATES) window.clearInterval(interval);
+        return nextValue;
+      });
+    }, BACKGROUND_UPDATE_INTERVAL);
+
+    return () => window.clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return undefined;
+
+    const interval = window.setInterval(() => {
+      setSuccessRate((value) => {
+        const nextValue = Math.min(value + SUCCESS_RATE_STEP, MAX_SUCCESS_RATE);
+        if (nextValue === MAX_SUCCESS_RATE) window.clearInterval(interval);
+        return nextValue;
+      });
+    }, SUCCESS_RATE_INTERVAL);
+
+    return () => window.clearInterval(interval);
+  }, []);
+
   return (
     <div className="ui-screen inference-screen">
       <UiSidebar />
@@ -42,7 +83,7 @@ export default function InferenceDashboard() {
             </label>
           </section>
           <div className="inference-metrics">
-            <Metric label="Requests" value="0" /><Metric label="Success Rate" value="0.0%" />
+            <Metric label="Requests" value={requests} /><Metric label="Success Rate" value={`${successRate.toFixed(1)}%`} />
             <Metric label="p95 Total Latency" value="--" /><Metric label="Errors" value="0" />
           </div>
           <section className="inference-requests"><h3>Requests Over Time</h3><p>Hourly successful, errored, and throttled request counts</p></section>

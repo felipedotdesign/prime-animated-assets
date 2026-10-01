@@ -1,0 +1,154 @@
+.loop-diagram,
+.loop-diagram * {
+  box-sizing: border-box;
+}
+
+.loop-diagram {
+  position: relative;
+  width: 742.5px;
+  height: 330px;
+  margin: 0;
+  overflow: hidden;
+  background: #000;
+  color: #fff;
+  font-family: var(--font-geist-mono), ui-monospace, "SFMono-Regular", "SF Mono", Menlo, Consolas, monospace;
+}
+
+.loop-diagram__canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1260px;
+  height: 560px;
+  overflow: hidden;
+  border: 1px solid #0e0e0e;
+  background: #000;
+  transform: scale(.5892857143);
+  transform-origin: top left;
+}
+
+.loop-diagram__baseline,
+.loop-diagram__arrow,
+.loop-diagram__point,
+.loop-diagram__path-frame,
+.loop-diagram__label {
+  position: absolute;
+}
+
+.loop-diagram__baseline {
+  top: 271.63px;
+  left: 326.81px;
+  display: block;
+  max-width: none;
+  z-index: 0;
+  clip-path: inset(0 100% 0 0);
+  animation: loop-line-reveal var(--loop-duration, 800ms) linear var(--loop-delay, 120ms) both;
+  will-change: clip-path;
+}
+
+.loop-diagram__arrow {
+  top: 266.63px;
+  left: 1067px;
+  display: block;
+  width: 0;
+  height: 0;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-left: 8px solid #fff;
+  z-index: 1;
+  opacity: 0;
+  animation: loop-arrow-appear var(--loop-checkpoint-duration, 160ms) linear calc(var(--loop-delay, 120ms) + var(--loop-duration, 800ms)) both;
+  will-change: opacity;
+}
+
+.loop-diagram__path-frame {
+  top: 74.844px;
+  left: 328.386px;
+  display: block;
+  width: 636.492px;
+  height: 410.313px;
+  overflow: hidden;
+  z-index: 1;
+  clip-path: none;
+}
+
+.loop-diagram__path-frame img {
+  position: absolute;
+  top: -113.0895px;
+  left: 113.0895px;
+  display: block;
+  max-width: none;
+  transform: rotate(90deg);
+}
+
+.loop-diagram__baseline-connector {
+  position: absolute;
+  top: 271.415px;
+  left: 326.805px;
+  width: 8.346px;
+  height: 1px;
+  z-index: 1;
+  background: #fff;
+  transform: rotate(75.68deg) scaleX(1);
+  transform-origin: left center;
+}
+
+.loop-diagram__repeat-clip {
+  position: absolute;
+  top: 270.334px;
+  left: 892.086px;
+  width: 12px;
+  height: 3px;
+  z-index: 2;
+  background: #000;
+  transform: rotate(73.3deg);
+  transform-origin: left center;
+}
+
+.loop-diagram__point {
+  display: block;
+  max-width: none;
+  z-index: 3;
+  opacity: 1;
+}
+
+.loop-diagram__label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  z-index: 4;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: .48px;
+  line-height: 12px;
+  opacity: 1;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+@keyframes loop-line-reveal {
+  to { clip-path: inset(0); }
+}
+
+@keyframes loop-arrow-appear {
+  to { opacity: 1; }
+}
+
+@media (max-width: 780px) {
+  .loop-diagram { transform: scale(.48); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .loop-diagram__baseline {
+    clip-path: none;
+    animation: none;
+    will-change: auto;
+  }
+
+  .loop-diagram__arrow {
+    opacity: 1;
+    animation: none;
+    will-change: auto;
+  }
+}

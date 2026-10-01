@@ -21,6 +21,7 @@ export default function CustomBehavior({
         "--custom-behavior-duration": `${MOTION_TIMING.customBehavior.duration}ms`,
       }}
     >
+      <span className="custom-behavior__diagonals" aria-hidden="true" />
       <div className="custom-behavior__boundary" aria-hidden="true">
         <svg viewBox="0 0 244 109" preserveAspectRatio="none">
           <path
