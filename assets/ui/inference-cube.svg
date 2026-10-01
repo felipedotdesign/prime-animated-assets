@@ -1,10 +1,10 @@
 <svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-<g id="Cube" clip-path="url(#clip0_0_95)">
+<g id="Cube" clip-path="url(#clip0_0_71)">
 <path id="Vector" d="M7 1.18125L13.3438 4.8125V9.1875L7 12.8187L0.65625 9.1875V4.8125L7 1.18125Z" stroke="#737373" stroke-width="0.7875" stroke-linejoin="round"/>
 <path id="Vector_2" d="M0.65625 4.8125L7 8.53125M7 8.53125L13.3438 4.8125M7 8.53125V12.8187M0.65625 9.1875L7 5.46875M7 5.46875L13.3438 9.1875M7 5.46875V1.18125" stroke="#737373" stroke-width="0.875" stroke-linejoin="round"/>
 </g>
 <defs>
-<clipPath id="clip0_0_95">
+<clipPath id="clip0_0_71">
 <rect width="14" height="14" fill="white"/>
 </clipPath>
 </defs>

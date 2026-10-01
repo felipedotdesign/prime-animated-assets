@@ -1,9 +1,9 @@
 <svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-<g id="GPU" clip-path="url(#clip0_0_72)">
+<g id="GPU" clip-path="url(#clip0_0_54)">
 <path id="Vector" d="M7.04182 2.20901V0.875122M9.70835 2.21106V0.877729M4.37514 2.21106V0.875122M7.04169 13.211V11.8777M9.70835 13.211V11.8777M4.37502 13.211V11.8777M11.875 9.71106H13.2083M11.875 4.37773H13.2083M11.875 7.04439H13.2083M0.875015 7.04439H2.20835M0.875015 9.71106H2.20835M0.875015 4.37773H2.20835M2.20835 2.21106H11.875V11.8777H2.20835V2.21106ZM9.20755 7.04373C9.20755 8.24033 8.23749 9.21039 7.04089 9.21039C5.84429 9.21039 4.87421 8.24033 4.87421 7.04373C4.87421 5.84713 5.84429 4.87707 7.04089 4.87707C8.23749 4.87707 9.20755 5.84713 9.20755 7.04373Z" stroke="#737373" stroke-width="0.875" stroke-linecap="square"/>
 </g>
 <defs>
-<clipPath id="clip0_0_72">
+<clipPath id="clip0_0_54">
 <rect width="14" height="14" fill="white"/>
 </clipPath>
 </defs>
